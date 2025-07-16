@@ -1,0 +1,488 @@
+@import url(./hamburger.css);
+@import url(./media.css);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.bg-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.bg-slide.active {
+    opacity: 1;
+}
+
+.navbar {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: rgba(118, 118, 118, 0.3);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.nav-buttons {
+    
+    display: flex;
+    gap: 20px;
+}
+
+.nav-btn {
+    background: linear-gradient(135deg, #617eff 0%,  #9165ff 100%) rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    box-shadow: 2px 4px 12px 0 rgba(0,0,0,0.25);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.nav-btn:hover {
+    background-position: 100% 0;
+    transform: scale(1.025) rotate(+2deg);
+    box-shadow: 0 4px 16px 0 rgba(89, 0, 255, 0.45), 0 3px 16px 0 rgba(0, 123, 255, 0.25);
+    filter: brightness(1.1) saturate(1.3) drop-shadow(0 0 10px #6a00e488);
+}
+
+.hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+    color: white;
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    max-width: 600px;
+    opacity: 0.9;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.cta-button {
+    background: white;
+    color: #333;
+    border: none;
+    padding: 18px 40px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.7s ease-in-out;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative; /* Required for pseudo-element positioning */
+    overflow: hidden; /* Clip the pseudo-element */
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0; /* Start with no fill */
+    background: linear-gradient(90deg, #1a7dff 0%, #4facfe 50%, #0b89ff 100%); /* Cornflower blue with transparency */
+    transition: height 0.4s ease; /* Adjust the speed of the fill */
+    z-index: -1; /* Place behind the text */
+}
+
+.cta-button:hover::before,
+.cta-button:active::before {
+    height: 100%; /* Fill the button on hover or click */
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+/* Editor Section */
+.editor-section {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 60px;
+    color: #2c3e50;
+}
+
+.editor-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.controls-panel {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+}
+
+.control-group {
+    margin-bottom: 10px;
+}
+
+.control-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    font-size: 16px;
+}
+
+.color-options {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.color-option {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.color-option:hover,
+.color-option.selected {
+    border-color: #3498db;
+    transform: scale(1.1);
+}
+
+.control-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-bottom: 10px;
+    transform: 2s ease-in-out;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.control-btn:hover {
+    background: linear-gradient(90deg, #667eea 0%, #4facfe 50%, #764ba2 100%);
+    transform: translateY(-2px);
+}
+
+.delete-btn {
+    background: linear-gradient(135deg, #c0392b 0%, #e17055 100%);
+    color: #fff;
+}
+
+.delete-btn:hover {
+    background: linear-gradient(135deg, #ef5c4c 0%, #c12e2e 100%);
+}
+
+.download-btn {
+    width: 100%;
+    background: conic-gradient(from 250deg at 50% 50%, #00afe4, #2d9bfb, #1bd481, #00c3fe);
+    background-size: 200% 200%;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 24px 0 rgba(79, 172, 254, 0.25), 0 1.5px 8px 0 rgba(67, 233, 123, 0.15);
+    cursor: pointer;
+    transition: 
+        background-position 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+        filter 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.download-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(90deg, #00f2fe 0%, #4facfe 50%, #764ba2 100%);
+    opacity: 0.15;
+    z-index: 0;
+    pointer-events: none;
+    animation: download-btn-glow 2.5s linear infinite;
+}
+
+@keyframes download-btn-glow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.download-btn span {
+    position: relative;
+    z-index: 1;
+}
+
+.download-btn:hover, .download-btn:focus {
+    background-position: 100% 0;
+    transform: scale(1.02) rotate(-1deg);
+    box-shadow: 0 4px 16px 0 rgba(79, 172, 254, 0.45), 0 3px 16px 0 rgba(67, 233, 123, 0.25);
+    filter: brightness(1.1) saturate(1.3) drop-shadow(0 0 10px #00d8e488);
+}
+
+.download-btn:active {
+    transform: scale(0.97);
+    filter: brightness(0.95);
+}
+
+.control-input,
+.control-select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.control-input:focus,
+.control-select:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.preview-panel {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.preview-header {
+    background: #2c3e50;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.preview-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.preview-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.preview-btn:hover,
+.preview-btn.active {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.preview-container {
+    height: 600px;
+    overflow-y: auto;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.preview-container.tablet {
+    max-width: 768px;
+    margin: 0 auto;
+}
+
+.preview-container.mobile {
+    max-width: 375px;
+    margin: 0 auto;
+}
+
+.preview-content {
+    min-height: 100%;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.placeholder-text {
+    color: #999;
+    font-style: italic;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.preview-element {
+    margin-bottom: 20px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.preview-element:hover {
+    background: #f8f9fa;
+}
+
+.preview-element.selected {
+    background: #e3f2fd;
+    border: 2px solid #2196f3;
+}
+
+.preview-element h1,
+.preview-element h2,
+.preview-element h3,
+.preview-element p {
+    margin: 0;
+}
+
+/* Newsletter Section */
+.newsletter-section {
+    background: #2c3e50;
+    color: white;
+    padding: 60px 0;
+}
+
+.newsletter-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.newsletter-content h3 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.newsletter-content p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 15px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.newsletter-input {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.newsletter-btn {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.newsletter-btn:hover {
+    background: #2980b9;
+}
+

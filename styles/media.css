@@ -1,0 +1,94 @@
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .navbar {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .nav-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+    
+    .nav-btn {
+        text-align: center;
+    }
+    
+    .editor-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .preview-container {
+        height: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content {
+        padding: 20px;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .controls-panel {
+        padding: 20px;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+/* Animation classes */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.bounce {
+    animation: bounce 0.3s ease;
+}
+
+@keyframes bounce {
+    0%, 20%, 60%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    80% {
+        transform: translateY(-5px);
+    }
+}

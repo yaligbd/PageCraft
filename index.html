@@ -1,0 +1,135 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PageCraft - Simple Landing Page Generator</title>
+    <link rel="stylesheet" href="./styles/main.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-background">
+            <div class="bg-slide active" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+            <div class="bg-slide" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+            <div class="bg-slide" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+            <div class="bg-slide" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);"></div>
+        </div>
+        
+       <!-- ... (rest of your HTML head and body) ... -->
+<nav class="navbar">
+    <div class="nav-logo">
+        <!-- SVG and Brand Name as before -->
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="40" height="40" rx="8" fill="white" fill-opacity="0.2"/>
+            <path d="M12 12h16v4H12v-4zm0 6h12v4H12v-4zm0 6h8v4H12v-4z" fill="white"/>
+        </svg>
+        <span>PageCraft</span>
+    </div>
+    <button class="hamburger" id="hamburger-btn" aria-label="Open navigation" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+    <div class="nav-buttons" id="nav-links">
+        <button class="nav-btn" onclick="scrollToSection('editor')">Create Page</button>
+        <button class="nav-btn">About</button>
+        <button class="nav-btn">Contact</button>
+    </div>
+</nav>
+<!-- ... (rest of your HTML) ... -->
+
+        <div class="hero-content">
+            <h1 class="hero-title">Build Beautiful Landing Pages</h1>
+            <p class="hero-subtitle">Create, customize, and download your landing page in minutes. No coding required.</p>
+            <button class="cta-button" onclick="scrollToSection('editor')">Start Building</button>
+        </div>
+    </section>
+
+    <!-- Page Editor Section -->
+    <section class="editor-section" id="editor">
+        <div class="container">
+            <h2 class="section-title">Page Builder</h2>
+            
+            <div class="editor-grid">
+                
+
+                <!-- Live Preview -->
+                <div class="preview-panel">
+                    <div class="preview-header">
+                        <span>Live Preview</span>
+                        <div class="preview-controls">
+                            <button class="preview-btn" onclick="setPreviewMode('desktop')" data-mode="desktop">Desktop</button>
+                            <button class="preview-btn" onclick="setPreviewMode('tablet')" data-mode="tablet">Tablet</button>
+                            <button class="preview-btn" onclick="setPreviewMode('mobile')" data-mode="mobile">Mobile</button>
+                        </div>
+                    </div>
+                    <div class="preview-container" id="preview-container">
+                        <div class="preview-content" id="preview-content">
+                            <p class="placeholder-text">Your page content will appear here. Start by adding elements!</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Controls Panel -->
+                <div class="controls-panel">
+                    <div class="control-group">
+                        <label>Background Color</label>
+                        <div class="color-options">
+                            <div class="color-option" data-color="#ffffff" style="background: #ffffff;"></div>
+                            <div class="color-option" data-color="#f8f9fa" style="background: linear-gradient(230deg, #667eea 0%, #4facfe 50%, #764ba2 100%);"></div>
+                            <div class="color-option" data-color="#e9ecef" style="background: linear-gradient(90deg, #669dea 0%, #1eceff 50%, #00ffd9 100%);"></div>
+                            <div class="color-option" data-color="#dee2e6" style="background: #797979;"></div>
+                            <div class="color-option" data-color="#1a1a1a" style="background: #353535;"></div>
+                            <div class="color-option" data-color="#1a1a1a" style="background: #000000;"></div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Add Elements</label>
+                        <button class="control-btn" onclick="addElement('h1')">Add H1 Heading</button>
+                        <button class="control-btn" onclick="addElement('h2')">Add H2 Heading</button>
+                        <button class="control-btn" onclick="addElement('h3')">Add H3 Heading</button>
+                        <button class="control-btn" onclick="addElement('p')">Add Paragraph</button>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Element Editor</label>
+                        <input type="text" id="element-text" placeholder="Enter text content" class="control-input">
+                        <select id="element-color" class="control-select">
+                            <option value="#333333">Dark Gray</option>
+                            <option value="#000000">Black</option>
+                            <option value="#666666">Gray</option>
+                            <option value="#2c3e50">Dark Blue</option>
+                            <option value="#e74c3c">Red</option>
+                            <option value="#3498db">Blue</option>
+                            <option value="#2ecc71">Green</option>
+                        </select>
+                        <button class="control-btn" onclick="updateSelectedElement()">Update Element</button>
+                        <button class="control-btn delete-btn" onclick="deleteSelectedElement()">Delete Element</button>
+                        <button class="control-btn delete-btn">Clear All</button>
+                        <button class="download-btn" onclick="downloadPage()">Download Page</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h3>Stay Updated</h3>
+                <p>Get the latest updates and design tips delivered to your inbox.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address" class="newsletter-input">
+                    <button type="submit" class="newsletter-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script src="./scripts/index.js"></script>
+</body>
+</html>
