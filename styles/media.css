@@ -10,8 +10,8 @@
     }
     
     .navbar {
-        padding: 15px 20px;
-        flex-direction: column;
+        padding: 15px 25px;
+        flex-direction: row;
         gap: 20px;
     }
     
@@ -19,6 +19,7 @@
         flex-direction: column;
         width: 100%;
         gap: 10px;
+        
     }
     
     .nav-btn {

@@ -1,6 +1,6 @@
 @import url(./hamburger.css);
 @import url(./media.css);
-
+@import url(./news.css);
 * {
     margin: 0;
     padding: 0;
@@ -15,7 +15,6 @@ body {
 
 .container {
     max-width: 1200px;
-    margin: 0 auto;
     padding: 0 20px;
 }
 
@@ -58,14 +57,20 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr auto;
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px;
     background: rgba(118, 118, 118, 0.3);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
+}
+#user-info {
+  color: #fff;
+  font-size: 16px;
+  margin-right: 20px;
+  white-space: nowrap;
 }
 
 .nav-logo {
@@ -78,7 +83,6 @@ body {
 }
 
 .nav-buttons {
-    
     display: flex;
     gap: 20px;
 }
@@ -104,13 +108,13 @@ body {
 }
 
 .hero-content {
+    margin-top: 20vh;
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 40px;
+    justify-content: top;
+    text-align: left;
+    padding: 5vw ;
     color: white;
 }
 
@@ -142,6 +146,8 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     position: relative; /* Required for pseudo-element positioning */
     overflow: hidden; /* Clip the pseudo-element */
+    max-width: 200px;
+    margin: 0 10px;
 }
 
 .cta-button::before {

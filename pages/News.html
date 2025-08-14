@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PageCraft - Newsletter Builder</title>
+  <script>
+    if (!localStorage.getItem('currentUser')) {
+      window.location.replace('../login.html');
+    }
+  </script>
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/media.css" />
+  <link rel="stylesheet" href="../styles/news.css" />
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-background">
+      <div class="bg-slide active" style="background: linear-gradient(315deg, #f1fffd 0%, #00b5a2 100%);"></div>
+      <div class="bg-slide" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+      <div class="bg-slide" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+      
+      <div class="nav-logo">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="8" fill="white" fill-opacity="0.2"/>
+          <path d="M12 12h16v4H12v-4zm0 6h12v4H12v-4zm0 6h8v4H12v-4z" fill="white"/>
+        </svg>
+        <span>PageCraft</span>
+      </div>
+      
+      <button class="hamburger" id="hamburger-btn" aria-label="Open navigation">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      
+      <div class="nav-buttons" id="nav-links">
+        <button class="nav-btn" onclick="window.location.href='./page.html'">Pages</button>
+        <button class="nav-btn" onclick="window.location.href='./banner.html'">Banners</button>
+        <button class="nav-btn" onclick="window.location.href='./about.html'">about</button>
+        <button class="nav-btn" onclick="window.location.href='./deploy.html'">Deploy</button>
+        <button class="nav-btn" onclick="window.location.href='../index.html'">Dashboard</button>
+      </div>
+    </nav>
+
+    <!-- Hero Content -->
+    <div class="hero-content">
+      <h1 class="hero-title">Newsletter Builder</h1>
+      <p class="hero-subtitle">Create engaging newsletters using your saved banners and landing pages</p>
+      <button class="cta-button" onclick="scrollToSection('editor')">Start Building</button>
+    </div>
+  </section>
+
+  <!-- Newsletter Builder -->
+  <section class="newsletter-builder">
+
+
+    <!-- Newsletter Layout Grid -->
+    <div class="newsletter-layout">
+      <h2>Newsletter Layout</h2>
+      <div class="newsletter-grid">
+        <div class="newsletter-slot">Drop here</div>
+        <div class="newsletter-slot">Drop here</div>
+        <div class="newsletter-slot">Drop here</div>
+        <div class="newsletter-slot">Drop here</div>
+        <div class="newsletter-slot">Drop here</div>
+        <div class="newsletter-slot">Drop here</div>
+      </div>
+    </div>
+
+        <!-- Project Picker -->
+    <div class="project-picker">
+      <h2>Select Projects to Add</h2>
+      <div class="project-list">
+        <div class="project-card">250x250 Banner</div>
+        <div class="project-card">300x600 Banner</div>
+        <div class="project-card">Landing Page</div>
+        <div class="project-card">250x250 Banner</div>
+        <div class="project-card">Landing Page</div>
+      </div>
+    </div>
+
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      if (currentUser) {
+        document.getElementById("user-name").textContent = currentUser.name || "User";
+        if (currentUser.avatar) {
+          document.getElementById("user-avatar").src = currentUser.avatar;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

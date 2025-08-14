@@ -1,0 +1,199 @@
+/* styles/login.css */
+
+/* 1. Full-page animated gradient background */
+body {
+  margin: 0;
+  padding: 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1vh;
+  min-height: 100vh;
+  background: linear-gradient(
+    45deg,
+    #6a11cb 0%,
+    #2575fc 16.67%,
+    #fc00ff 33.33%,
+    #00dbde 50%,
+    #ff9a9e 66.67%,
+    #fad0c4 83.33%,
+    #6a11cb 100%
+  );
+  background-size: 600% 600%;
+  animation: gradientShift 20s linear infinite;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #2c3e50;
+}
+
+@keyframes gradientShift {
+  0%   { background-position:   0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* 2. Language switch button */
+.lang-switch {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 6px 12px;
+  background: transparent;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.lang-switch:hover {
+  color: #ffeb3b;
+}
+
+/* 3. App header */
+.app-header {
+  text-align: center;
+  margin: 40px 20px 20px;
+  z-index: 1;
+}
+.app-header h1 {
+  margin: 0 0 12px;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+.app-header .app-tagline,
+.app-header .app-intro {
+  margin: 0 0 12px;
+  color: rgba(255, 255, 255, 0.85);
+  padding: 0 1rem;
+}
+.app-header .app-tagline { font-size: 1.3rem; }
+.app-header .app-intro   { font-size: 1.1rem; opacity: 1; }
+
+.btn-log-in {
+    background: linear-gradient(135deg, #562cff 0%,  #1097ff 100%) rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    box-shadow: 2px 4px 12px 0 rgba(0,0,0,0.25);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.btn-log-in:hover {
+    background-position: 100% 0;
+    transform: scale(1.025) rotate(+2deg);
+    box-shadow: 0 4px 16px 0 rgba(55, 0, 255, 0.37), 0 3px 16px 0 rgba(0, 140, 255, 0.323);
+    filter: brightness(1.1) saturate(1.3) drop-shadow(0 0 10px #4659ff88);
+}
+
+
+.btn-sign-up {
+    background: linear-gradient(135deg, #00d77a 0%,  #3bbefa 100%) rgba(255, 255, 255, 0.2);
+     color: white;
+    border: none;
+    padding: 10px 20px;
+    box-shadow: 2px 4px 12px 0 rgba(0,0,0,0.25);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.btn-sign-up:hover {
+    background-position: 100% 0;
+    transform: scale(1.025) rotate(-2deg);
+    box-shadow: 0 4px 16px 0 rgba(7, 248, 184, 0.45), 0 3px 16px 0 rgba(38, 168, 248, 0.25);
+    filter: brightness(1.1) saturate(1.3) drop-shadow(0 0 10px #0b2fff88);
+}
+
+
+/* 4. Primary and form buttons */
+.btn {
+    margin-bottom: 1rem;
+    background: white;
+    color: #333;
+    border: none;
+    padding: 15px 35px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.7s ease-in-out;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative; /* Required for pseudo-element positioning */
+    overflow: hidden; /* Clip the pseudo-element */
+}
+.btn::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0; /* Start with no fill */
+    background: linear-gradient(90deg, #1abeff 0%, #6854ff 50%, #35a4ff 100%); /* Cornflower blue with transparency */
+    transition: height 0.4s ease; /* Adjust the speed of the fill */
+    z-index: -1; /* Place behind the text */
+}
+
+.btn:hover::before,
+.btn:active::before {
+    height: 100%; /* Fill the button on hover or click */
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+
+/* 6. Login panel */
+.login-container {
+  width: 100%;
+  max-width: 360px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  padding: 24px;
+  text-align: center;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  margin-bottom: 20px;
+  z-index: 1;
+}
+#auth-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.form-group {
+  margin-bottom: 16px;
+  text-align: left;
+}
+.form-group input {
+  width: 95%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+.form-group input:focus {
+  border-color: #6a11cb;
+}
+
+/* 7. Error message */
+#error-msg {
+  margin-top: 12px;
+  color: #ff3860;
+  font-size: 0.875rem;
+  display: none;
+}
+#error-msg.visible {
+  display: block;
+}

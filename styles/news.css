@@ -1,0 +1,68 @@
+.newsletter-builder {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  gap: 30px;
+  padding: 40px;
+  background: #f8f9fa;
+}
+
+.project-picker, .newsletter-layout {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.project-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.project-card {
+  border: 2px dashed #ccc;
+  background: #fafafa;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: grab;
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  border-color: #3498db;
+  background: #f0faff;
+}
+
+.newsletter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 3fr));
+  gap: 15px;
+  margin-top: 15px;
+  min-height: 500px;
+}
+
+.newsletter-slot {
+  border: 2px dashed #ddd;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  background: #fff;
+  color: #888;
+  transition: all 0.3s ease;
+}
+
+.newsletter-slot:hover {
+  border-color: #27ae60;
+  background: #f5fff8;
+}
+
+@media (max-width: 892px) {
+  .newsletter-builder {
+    grid-template-columns: 1fr;
+  }
+  .newsletter-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
