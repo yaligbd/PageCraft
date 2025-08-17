@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Deploy</title>
+
+  <!-- Scripts (same pattern as other pages) -->
+  <script type="module" src="../scripts/index.js"></script>
+
+  <!-- Your site styles -->
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/media.css" />
+  <!-- Page-specific styles you already have -->
+  <link rel="stylesheet" href="../styles/deploy.css" />
+</head>
+<body id="deploy">
+
+  <!-- Hero wrapper (keeps your hero layout/styles) -->
+  <section class="hero" id="hero">
+    <div class="hero-background">
+      <div class="bg-slide active" style="background: linear-gradient(325deg, #ffffff 0%, #5a6e91 60%, #423c74 100%);"></div>
+      <div class="bg-slide" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+      <div class="bg-slide" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+      <div class="bg-slide" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);"></div>
+    </div>
+
+    <!-- NAVBAR (identical structure/classes as your other pages) -->
+    <nav class="navbar">
+      <!-- Left: Logo -->
+      <div class="nav-logo">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="8" fill="white" fill-opacity="0.2"/>
+          <path d="M12 12h16v4H12v-4zm0 6h12v4H12v-4zm0 6h8v4H12v-4z" fill="white"/>
+        </svg>
+        <span>PageCraft</span>
+      </div>
+
+      <!-- Center: Nav links (desktop) -->
+      <div class="nav-links">
+        <a href="../index.html">Dashboard</a>
+        <a href="./page.html">Pages</a>
+        <a href="./banner.html">Banners</a>
+        <a href="./News.html">Newsletters</a>
+        <a href="./deploy.html">Deploy</a>
+        <a href="./about.html">About</a>
+      </div>
+
+      <!-- Right: Actions (desktop) -->
+      <div class="nav-actions desktop-only">
+        <button class="lang-btn">🌐 EN</button>
+        <a href="./login.html" class="profile-btn">Log In</a>
+        <a href="./sign.html" class="btn-gradient">Get Started</a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button class="hamburger mobile-only" id="hamburger" aria-label="Open menu">☰</button>
+
+      <!-- Mobile dropdown -->
+      <div class="hamburger-menu" id="hamburger-menu" role="menu" aria-hidden="true">
+        <div class="menu-links">
+          <a href="../index.html" role="menuitem">Dashboard</a>
+          <a href="./page.html" role="menuitem">Pages</a>
+          <a href="./banner.html" role="menuitem">Banners</a>
+          <a href="./News.html" role="menuitem">Newsletters</a>
+          <a href="./deploy.html" role="menuitem">Deploy</a>
+          <a href="./about.html" role="menuitem">About</a>
+          <a href="./sign.html" class="btn-gradient">Get Started</a>
+          <a href="./login.html" class="profile-btn">Log In</a>
+        </div>
+
+        <!-- Mobile profile block -->
+        <div class="menu-profile">
+          <img src="./assets/profile-placeholder.png" alt="User Avatar" class="profile-avatar">
+          <div class="profile-info">
+            <p class="profile-name">John Doe</p>
+            <p class="profile-company">My Company</p>
+            <div class="storage-bar"><div class="storage-fill" style="width: 18%;"></div></div>
+            <p class="storage-text">18% used</p>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="hero-content">
+      <h1 class="hero-title">Deploy your Landing Page</h1>
+      <p class="hero-subtitle">From no account to a live site with your dashboard + Netlify.</p>
+      <button class="cta-button" onclick="document.getElementById('deploy-guide').scrollIntoView({behavior:'smooth'})">
+        Start Deploy
+      </button>
+    </div>
+
+    <div id="hero-3d-container"></div>
+  </section>
+
+  <!-- MAIN: deploy instructions (uses your deploy.css helper classes) -->
+  <main class="container" id="deploy-guide">
+    <h2 class="section-title" style="text-align:center;">Go Live in Minutes</h2>
+
+    <div class="grid two-col">
+      <!-- STEP 1 -->
+      <section class="step-card">
+        <div class="step-num">1</div>
+        <h2>Create your account</h2>
+        <ol class="checklist">
+          <li>Open <a href="./pages/login.html">Login</a> and sign up (or sign in).</li>
+          <li>You need an account to save pages and download the ZIP.</li>
+        </ol>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="step-card">
+        <div class="step-num">2</div>
+        <h2>Build &amp; Save your page</h2>
+        <ol class="checklist">
+          <li>Go to the <a href="./index.html">Dashboard</a>.</li>
+          <li>Create or edit your landing page (Pages → New Page).</li>
+          <li>Click <strong>Save</strong>. Once saved, you can download a deployable ZIP.</li>
+        </ol>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="step-card">
+        <div class="step-num">3</div>
+        <h2>Download your ZIP</h2>
+        <ol class="checklist">
+          <li>From your Dashboard, select the page.</li>
+          <li>Click <strong>Download ZIP</strong>. The archive includes <code>index.html</code> and your assets.</li>
+        </ol>
+        <div class="tip">Tip: Keep the folder structure intact when deploying.</div>
+      </section>
+
+      <!-- STEP 4 (Netlify) -->
+      <section class="step-card">
+        <div class="step-num">4</div>
+        <h2>Deploy to Netlify (recommended)</h2>
+
+        <div class="provider-card">
+          <img src="https://www.netlify.com/img/press/logos/logomark.png" alt="Netlify" />
+          <div>
+            <h3>Option A — Drag &amp; Drop</h3>
+            <ol>
+              <li>Open <a href="https://app.netlify.com/drop" target="_blank" rel="noopener noreferrer">Netlify Drop</a>.</li>
+              <li>Drag your <code>.zip</code> file onto the page.</li>
+              <li>Netlify gives an instant <code>*.netlify.app</code> URL.</li>
+            </ol>
+
+            <h3>Option B — From Git</h3>
+            <ol>
+              <li>Create a GitHub repo and upload your files.</li>
+              <li>In Netlify: <em>New site from Git</em> → choose GitHub → select your repo.</li>
+              <li>Static site: leave <em>Build command</em> empty, set <em>Publish directory</em> to repo root.</li>
+            </ol>
+
+            <div class="note">
+              <strong>Custom domain:</strong> Site → <em>Domain settings</em> → <em>Add custom domain</em> and follow DNS steps.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 5 (Alternative host) -->
+      <section class="step-card">
+        <div class="step-num">5</div>
+        <h2>Alternative free host — GitHub Pages</h2>
+        <div class="provider-card">
+          <img src="https://github.githubassets.com/favicons/favicon.svg" alt="GitHub" />
+          <div>
+            <ol>
+              <li>Create a free <a href="https://github.com/signup" target="_blank" rel="noopener noreferrer">GitHub account</a>.</li>
+              <li>Create a <strong>public</strong> repository (e.g., <code>my-landing</code>).</li>
+              <li>Unzip your download and upload contents so <code>index.html</code> is at repo root.</li>
+              <li>Repo → <em>Settings</em> → <em>Pages</em> → Branch: <em>main</em>, Folder: <em>/(root)</em> → Save.</li>
+              <li>After ~1 minute: <code>https://&lt;user&gt;.github.io/&lt;repo&gt;/</code> is live.</li>
+            </ol>
+            <div class="tip">If hosted under a subpath, use relative links like <code>./about.html</code> (not <code>/about.html</code>).</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="faq">
+      <h2>Troubleshooting</h2>
+      <details>
+        <summary>Blank page</summary>
+        <p>Ensure the main file is <code>index.html</code> and asset paths are correct.</p>
+      </details>
+      <details>
+        <summary>Images/CSS/JS 404</summary>
+        <p>Don’t rename or move folders from the ZIP—keep structure intact.</p>
+      </details>
+      <details>
+        <summary>Links break on GitHub Pages</summary>
+        <p>Use relative links (e.g., <code>./contact.html</code>) if your site isn’t at the domain root.</p>
+      </details>
+      <details>
+        <summary>Update your live site</summary>
+        <p>Make edits → download a new ZIP → re-deploy (or push to Git to let Netlify rebuild).</p>
+      </details>
+    </section>
+  </main>
+
+  <!-- FOOTER (same markup pattern as your pages) -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <!-- Footer Logo -->
+      <div class="footer-logo">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="8" fill="white" fill-opacity="0.2"/>
+          <path d="M12 12h16v4H12v-4zm0 6h12v4H12v-4zm0 6h8v4H12v-4z" fill="white"/>
+        </svg>
+        <span>PageCraft</span>
+      </div>
+
+      <!-- Footer Links -->
+      <ul class="footer-links">
+        <li><a href="#">Careers</a></li>
+        <li><a href="./about.html">About</a></li>
+        <li><a href="./deploy.html">Deploy</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Community</a></li>
+        <li><a href="./login.html">Log In</a></li>
+        <li><a href="./sign.html">Sign Up</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> PageCraft. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

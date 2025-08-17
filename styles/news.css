@@ -37,10 +37,11 @@
 
 .newsletter-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 3fr));
+  grid-template-columns: 1fr 1fr;
+  /* grid-template-columns: repeat(auto-fill, minmax(200px, 2fr)); */
   gap: 15px;
   margin-top: 15px;
-  min-height: 500px;
+  min-height: 600px;
 }
 
 .newsletter-slot {

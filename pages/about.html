@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — PageCraft</title>
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/media.css" />
+  <!-- Reuse the same helper styles used on Deploy (cards, grid, badges, notes) -->
+  <link rel="stylesheet" href="../styles/deploy.css" />
+
+  <script type="module" src="../scripts/index.js"></script>
+</head>
+<body id="about">
+
+  <!-- HERO (keeps your hero + navbar structure for consistent styling) -->
+  <section class="hero" id="hero">
+    <div class="hero-background">
+      <div class="bg-slide active" style="background: linear-gradient(325deg, #ffffff 0%, #9cbfff 60%, #5643ff 100%);"></div>
+      <div class="bg-slide" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+      <div class="bg-slide" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+      <div class="bg-slide" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);"></div>
+    </div>
+
+    <!-- NAVBAR (same classes/IDs as your other pages) -->
+  <nav class="navbar">
+      <!-- Left: Logo -->
+      <div class="nav-logo">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="8" fill="white" fill-opacity="0.2"/>
+          <path d="M12 12h16v4H12v-4zm0 6h12v4H12v-4zm0 6h8v4H12v-4z" fill="white"/>
+        </svg>
+        <span>PageCraft</span>
+      </div>
+
+      <!-- Center: Nav links (desktop) -->
+      <div class="nav-links">
+        <a href="../index.html">Dashboard</a>
+        <a href="./page.html">Pages</a>
+        <a href="./banner.html">Banners</a>
+        <a href="./News.html">Newsletters</a>
+        <a href="./deploy.html">Deploy</a>
+        <a href="./about.html">About</a>
+      </div>
+
+      <!-- Right: Actions (desktop) -->
+      <div class="nav-actions desktop-only">
+        <button class="lang-btn">🌐 EN</button>
+        <a href="./login.html" class="profile-btn">Log In</a>
+        <a href="./sign.html" class="btn-gradient">Get Started</a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button class="hamburger mobile-only" id="hamburger" aria-label="Open menu">☰</button>
+
+      <!-- Mobile dropdown -->
+      <div class="hamburger-menu" id="hamburger-menu" role="menu" aria-hidden="true">
+        <div class="menu-links">
+          <a href="../index.html" role="menuitem">Dashboard</a>
+          <a href="./page.html" role="menuitem">Pages</a>
+          <a href="./banner.html" role="menuitem">Banners</a>
+          <a href="./News.html" role="menuitem">Newsletters</a>
+          <a href="./deploy.html" role="menuitem">Deploy</a>
+          <a href="./about.html" role="menuitem">About</a>
+          <a href="./sign.html" class="btn-gradient">Get Started</a>
+          <a href="./login.html" class="profile-btn">Log In</a>
+        </div>
+
+        <!-- Mobile profile block -->
+        <div class="menu-profile">
+          <img src="./assets/profile-placeholder.png" alt="User Avatar" class="profile-avatar">
+          <div class="profile-info">
+            <p class="profile-name">John Doe</p>
+            <p class="profile-company">My Company</p>
+            <div class="storage-bar"><div class="storage-fill" style="width: 18%;"></div></div>
+            <p class="storage-text">18% used</p>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+
+    <div class="hero-content">
+      <h1 class="hero-title">About PageCraft</h1>
+      <p class="hero-subtitle">Free, beautiful web features to help small businesses grow.</p>
+      <div class="hero-badges">
+        <span class="badge">Student-built</span>
+        <span class="badge">Open & Accessible</span>
+        <span class="badge">No-Code Friendly</span>
+      </div>
+    </div>
+
+    <div id="hero-3d-container"></div>
+  </section>
+
+  <!-- MAIN -->
+  <main class="container" >
+    <h2 class="section-title" style="text-align:center;">Our Story</h2>
+
+    <div class="grid two-col">
+      <section class="step-card">
+        <h2>Built by Students, For Everyone</h2>
+        <p>
+          PageCraft started as a student project with a simple idea: give small businesses and
+          creators the same kind of web power big teams have—without the price tag. We combine
+          clean design with practical features so anyone can launch fast and look legit.
+        </p>
+        <div class="note">
+          We’re learning in public. Your feedback shapes what we build next.
+        </div>
+      </section>
+
+      <section class="step-card">
+        <h2>Our Mission</h2>
+        <p>
+          Help small businesses <strong>start, test, and grow</strong> online—with free tools,
+          ready-to-ship blocks, and deploy-in-minutes workflows.
+        </p>
+        <ol class="checklist">
+          <li>Zero setup overhead</li>
+          <li>Free hosting paths (Netlify, GitHub Pages)</li>
+          <li>Export &amp; own your code—always</li>
+          <li>Accessible defaults &amp; responsive design</li>
+        </ol>
+      </section>
+
+      <section class="step-card">
+        <h2>What You Can Build</h2>
+        <p>Landing pages, banners, newsletters, and more—quickly assembled from components.</p>
+        <div class="tip">Use the Dashboard to craft, save, and export a ZIP ready for deployment.</div>
+      </section>
+
+      <section class="step-card">
+        <h2>Values</h2>
+        <ol class="checklist">
+          <li><strong>Freedom:</strong> Your site, your files, your domain.</li>
+          <li><strong>Clarity:</strong> No dark patterns or hidden paywalls.</li>
+          <li><strong>Community:</strong> We welcome ideas, bug reports, and contributions.</li>
+          <li><strong>Learning:</strong> We document decisions so others can learn too.</li>
+        </ol>
+      </section>
+    </div>
+
+    <section class="step-card" style="margin-top:1.2rem;">
+      <h2>How It Works</h2>
+      <ol class="checklist">
+        <li>Create an account to save your work.</li>
+        <li>Design your page with our no-code components.</li>
+        <li>Download a ready-to-deploy ZIP.</li>
+        <li>Deploy free via Netlify or GitHub Pages (see <a href="./deploy.html">Deploy</a>).</li>
+      </ol>
+    </section>
+
+    <section class="step-card" style="margin-top:1.2rem;">
+      <h2>Get Involved</h2>
+      <p>
+        PageCraft grows with you. Share ideas, request features, or join the build. Whether you’re a designer,
+        developer, marketer, or small business owner—there’s a spot for you.
+      </p>
+      <div style="display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.6rem;">
+        <a class="btn-gradient" href="./sign.html">Create an Account</a>
+        <a class="btn ghost" href="./deploy.html">Read Deploy Guide</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <!-- Footer Logo -->
+      <div class="footer-logo">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="8" fill="white" fill-opacity="0.2"/>
+          <path d="M12 12h16v4H12v-4zm0 6h12v4H12v-4zm0 6h8v4H12v-4z" fill="white"/>
+        </svg>
+        <span>PageCraft</span>
+      </div>
+
+      <!-- Footer Links -->
+      <ul class="footer-links">
+        <li><a href="#">Careers</a></li>
+        <li><a href="./about.html">About</a></li>
+        <li><a href="./deploy.html">Deploy</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Community</a></li>
+        <li><a href="./login.html">Log In</a></li>
+        <li><a href="./sign.html">Sign Up</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> PageCraft. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

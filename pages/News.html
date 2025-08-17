@@ -3,66 +3,109 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PageCraft - Newsletter Builder</title>
+  <title>Newsletters</title>
   <script>
+    // Redirect to login if not logged in
     if (!localStorage.getItem('currentUser')) {
-      window.location.replace('../login.html');
+      window.location.replace('login.html');
     }
   </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="../scripts/3D.JS"></script>
+    <script type="module" src="../scripts/index.js"></script>
   <link rel="stylesheet" href="../styles/main.css" />
   <link rel="stylesheet" href="../styles/media.css" />
   <link rel="stylesheet" href="../styles/news.css" />
 </head>
-<body>
+<body id="newsletters">
 
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-background">
-      <div class="bg-slide active" style="background: linear-gradient(315deg, #f1fffd 0%, #00b5a2 100%);"></div>
+      <div class="bg-slide active" style="background: linear-gradient(325deg, #ffffff 0%,#6e84fb 60%,  #0319b9 100%);"></div>
       <div class="bg-slide" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
       <div class="bg-slide" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar">
-      
-      <div class="nav-logo">
-        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="40" height="40" rx="8" fill="white" fill-opacity="0.2"/>
-          <path d="M12 12h16v4H12v-4zm0 6h12v4H12v-4zm0 6h8v4H12v-4z" fill="white"/>
-        </svg>
-        <span>PageCraft</span>
+ <nav class="navbar">
+  <!-- Left: Logo -->
+  <div class="nav-logo">
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+         xmlns="http://www.w3.org/2000/svg">
+      <rect width="40" height="40" rx="8" fill="white" fill-opacity="0.2"/>
+      <path d="M12 12h16v4H12v-4zm0 6h12v4H12v-4zm0 6h8v4H12v-4z" fill="white"/>
+    </svg>
+    <span>PageCraft</span>
+  </div>
+
+  <!-- Center: Navigation links (desktop only) -->
+  <div class="nav-links">
+    <a href="../index.html">Dashboard</a>
+  <a href="./page.html">Pages</a>
+  <a href="./banner.html">Banners</a>
+    <a href="./News.html">Newsletters</a>
+  <a href="./deploy.html">Deploy</a>
+  <a href="./about.html">About</a>
+</div>
+
+  <!-- Right: Actions (desktop only) -->
+  <div class="nav-actions desktop-only">
+    <button class="lang-btn">🌐 EN</button>
+    <a href="./login.html" class="profile-btn">Log In</a>
+    <a href="./sign.html" class="btn-gradient">Get Started</a>
+  </div>
+
+  <!-- Mobile Hamburger -->
+  <button class="hamburger mobile-only" id="hamburger">☰</button>
+
+  <!-- Mobile Dropdown -->
+  <div class="hamburger-menu" id="hamburger-menu">
+    <div class="menu-links">
+        <a href="../index.html">Dashboard</a>
+        <a href="./page.html">Pages</a>
+        <a href="./banner.html">Banners</a>
+        <a href="./News.html">Newsletters</a>
+        <a href="./deploy.html">Deploy</a>
+        <a href="./about.html">About</a>
+        <a href="./sign.html" class="btn-gradient">Get Started</a>
+        <a href="./login.html" class="profile-btn">Log In</a>
+    </div>
+
+    <!-- Profile section -->
+    <div class="menu-profile">
+      <img src="./assets/profile-placeholder.png" alt="User Avatar" class="profile-avatar">
+      <div class="profile-info">
+        <p class="profile-name">John Doe</p>
+        <p class="profile-company">My Company</p>
+        <div class="storage-bar">
+          <div class="storage-fill" style="width: 40%;"></div>
+        </div>
+        <p class="storage-text">40% used</p>
       </div>
-      
-      <button class="hamburger" id="hamburger-btn" aria-label="Open navigation">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
-      
-      <div class="nav-buttons" id="nav-links">
-        <button class="nav-btn" onclick="window.location.href='./page.html'">Pages</button>
-        <button class="nav-btn" onclick="window.location.href='./banner.html'">Banners</button>
-        <button class="nav-btn" onclick="window.location.href='./about.html'">about</button>
-        <button class="nav-btn" onclick="window.location.href='./deploy.html'">Deploy</button>
-        <button class="nav-btn" onclick="window.location.href='../index.html'">Dashboard</button>
-      </div>
-    </nav>
+    </div>
+  </div>
+</nav>
+
 
     <!-- Hero Content -->
     <div class="hero-content">
-      <h1 class="hero-title">Newsletter Builder</h1>
+      <h1 class="hero-title">Craft Your Own Newsletter</h1>
       <p class="hero-subtitle">Create engaging newsletters using your saved banners and landing pages</p>
       <button class="cta-button" onclick="scrollToSection('editor')">Start Building</button>
     </div>
+    <div id="hero-3d-container"></div>
   </section>
 
   <!-- Newsletter Builder -->
   <section class="newsletter-builder">
 
+      <h2 class="section-title">Newsletter Builder</h2>
+      <p class="section-description">Drag and drop your saved banners and landing pages to create a custom newsletter.</p>
 
     <!-- Newsletter Layout Grid -->
     <div class="newsletter-layout">
+        
       <h2>Newsletter Layout</h2>
       <div class="newsletter-grid">
         <div class="newsletter-slot">Drop here</div>
@@ -86,18 +129,44 @@
       </div>
     </div>
 
-  </section>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-      if (currentUser) {
-        document.getElementById("user-name").textContent = currentUser.name || "User";
-        if (currentUser.avatar) {
-          document.getElementById("user-avatar").src = currentUser.avatar;
-        }
-      }
-    });
-  </script>
+  </section>
+  <!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-container">
+    
+    <!-- Footer Logo -->
+    <div class="footer-logo">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="40" height="40" rx="8" fill="white" fill-opacity="0.2"/>
+        <path d="M12 12h16v4H12v-4zm0 6h12v4H12v-4zm0 6h8v4H12v-4z" fill="white"/>
+      </svg>
+      <span>PageCraft</span>
+    </div>
+
+    <!-- Footer Links -->
+    <ul class="footer-links">
+      <li><a href="#">Careers</a></li>
+      <li><a href="./about.html">About</a></li>
+      <li><a href="./deploy.html">Deploy</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Community</a></li>
+      <li><a href="./login.html">Log In</a></li>
+      <li><a href="./sign.html">Sign Up</a></li>
+    </ul>
+    
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <p>&copy; <span id="year"></span> PageCraft. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+
 </body>
 </html>
