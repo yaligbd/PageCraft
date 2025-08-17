@@ -68,8 +68,7 @@
 /* Small screens (phones) */
 @media (max-width: 480px) {
   .hero-content {
-     margin-top: 5vh;
-    padding: 20px;
+     padding-top: 5vh;
     text-align: center;
   }
 
