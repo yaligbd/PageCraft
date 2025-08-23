@@ -3,12 +3,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pages</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pages</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="../scripts/3D.JS"></script>
-    <script type="module" src="../scripts/index.js"></script>
+  <script type="module" src="../scripts/index.js"></script>
+  <script src="../scripts/login.js"></script>
+  <script src="../scripts/page.js"></script>
   <link rel="stylesheet" href="../styles/main.css" />
   <link rel="stylesheet" href="../styles/media.css" />
 </head>
@@ -49,7 +51,8 @@
   <div class="nav-actions desktop-only">
     <button class="lang-btn">🌐 EN</button>
     <a href="./login.html" class="profile-btn">Log In</a>
-    <a href="./sign.html" class="btn-gradient">Get Started</a>
+    <a href="./sign.html" class="btn-gradient">Sign Up</a>
+    <div id="profileDiv" style="display:none; align-items:center; gap:8px;"></div>
   </div>
 
   <!-- Mobile Hamburger -->
@@ -66,11 +69,12 @@
         <a href="./about.html">About</a>
         <a href="./sign.html" class="btn-gradient">Get Started</a>
         <a href="./login.html" class="profile-btn">Log In</a>
+              <button class="log-out">Log Out</button> <!--   it is styled in main.css to be displayed none -->
     </div>
 
     <!-- Profile section -->
     <div class="menu-profile">
-      <img src="./assets/profile-placeholder.png" alt="User Avatar" class="profile-avatar">
+      <img src="../asssets/ChatGPT Image Aug 18, 2025, 09_11_20 PM.png" alt="User Avatar" class="profile-avatar">
       <div class="profile-info">
         <p class="profile-name">John Doe</p>
         <p class="profile-company">My Company</p>
@@ -104,10 +108,17 @@
                     <div class="preview-header">
                         <span>Live Preview</span>
                         <div class="preview-controls">
-                            <button class="preview-btn" onclick="setPreviewMode('desktop')" data-mode="desktop">Desktop</button>
-                            <button class="preview-btn" onclick="setPreviewMode('tablet')" data-mode="tablet">Tablet</button>
-                            <button class="preview-btn" onclick="setPreviewMode('mobile')" data-mode="mobile">Mobile</button>
+                            <button class="preview-btn" onclick="setPreviewMode('Style 1')" data-mode="Style 1">Style 1</button>
+                            <button class="preview-btn" onclick="setPreviewMode('Style 2')" data-mode="Style 2">Style 2</button>
+                            <button class="preview-btn" onclick="setPreviewMode('Style 3')" data-mode="Style 3">Style 3</button>
                         </div>
+                        <!-- Template style switcher arrows -->
+                        <div class="style-arrows">
+                        <span>Text Alignment</span>
+                              <button id="tpl-prev" class="style-arrow" aria-label="Previous style">⟵</button>
+                              <button id="tpl-next" class="style-arrow" aria-label="Next style">⟶</button>
+                        </div>
+
                     </div>
                     <div class="preview-container" id="preview-container">
                         <div class="preview-content" id="preview-content">
@@ -121,10 +132,10 @@
                         <label>Background Color</label>
                         <div class="color-options">
                             <div class="color-option" data-color="#ffffff" style="background: #ffffff;"></div>
-                            <div class="color-option" data-color="#f8f9fa" style="background: linear-gradient(230deg, #667eea 0%, #4facfe 50%, #764ba2 100%);"></div>
-                            <div class="color-option" data-color="#e9ecef" style="background: linear-gradient(90deg, #669dea 0%, #1eceff 50%, #00ffd9 100%);"></div>
-                            <div class="color-option" data-color="#dee2e6" style="background: #797979;"></div>
-                            <div class="color-option" data-color="#1a1a1a" style="background: #353535;"></div>
+                            <div class="color-option" data-color="linear-gradient(230deg, #584dff 0%, #ffffff 30%, #ffffff 70%, #cca5ff 100%)" style="background: linear-gradient(230deg, #584dff 0%, #ffffff 30%, #ffffff 70%, #cca5ff 100%);"></div>
+                            <div class="color-option" data-color="linear-gradient(115deg, #ffffff 0%, #a8dfff 45%, #7bfdff 55%, #ffffff 100%)" style="background: linear-gradient(115deg, #ffffff 0%, #a8dfff 45%, #7bfdff 55%, #ffffff 100%);"></div>
+                            <div class="color-option" data-color="#dee2e6" style="background: #ffffbc;"></div>
+                            <div class="color-option" data-color="#1a1a1a" style="background: #858585;"></div>
                             <div class="color-option" data-color="#1a1a1a" style="background: #000000;"></div>
                         </div>
                     </div>
@@ -132,8 +143,8 @@
                     <div class="control-group">
                         <label>Add Elements</label>
                         <button class="control-btn" onclick="addElement('h1')">Add H1 Heading</button>
-                        <button class="control-btn" onclick="addElement('h2')">Add H2 Heading</button>
-                        <button class="control-btn" onclick="addElement('h3')">Add H3 Heading</button>
+                        <button class="control-btn" onclick="addElement('h2')">Add H3 Heading</button>
+                        <button class="control-btn" onclick="addElement('pic')">Add a Picture</button>
                         <button class="control-btn" onclick="addElement('p')">Add Paragraph</button>
                     </div>
 
@@ -141,10 +152,10 @@
                         <label>Element Editor</label>
                         <input type="text" id="element-text" placeholder="Enter text content" class="control-input">
                         <select id="element-color" class="control-select">
-                            <option value="#333333">Dark Gray</option>
+                            <option value="#ffffff">white</option>
                             <option value="#000000">Black</option>
                             <option value="#666666">Gray</option>
-                            <option value="#2c3e50">Dark Blue</option>
+                            <option value="#7210fc">purple</option>
                             <option value="#e74c3c">Red</option>
                             <option value="#3498db">Blue</option>
                             <option value="#2ecc71">Green</option>
@@ -152,28 +163,13 @@
                         <button class="control-btn" onclick="updateSelectedElement()">Update Element</button>
                         <button class="control-btn delete-btn" onclick="deleteSelectedElement()">Delete Element</button>
                         <button class="control-btn delete-btn">Clear All</button>
-                        <button class="download-btn" onclick="downloadPage()">Save Page</button>
+                        <button id="send" class="download-btn" onclick="downloadPage()">Save Page</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Newsletter Section
-    <section class="newsletter-section">
-        <div class="container">
-            <div class="newsletter-content">
-                <h3>Stay Updated</h3>
-                <p>Get the latest updates and design tips delivered to your inbox.</p>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Enter your email address" class="newsletter-input">
-                    <button type="submit" class="newsletter-btn">Subscribe</button>
-                </form>
-            </div>
-        </div>
-    </section> -->
-
-    <!-- Footer -->
 <footer class="site-footer">
   <div class="footer-container">
     

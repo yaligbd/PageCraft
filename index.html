@@ -8,6 +8,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script type="module" src="./scripts/3D.JS"></script>
   <script type="module" src="./scripts/index.js"></script>
+  <script src="./scripts/login.js"></script>
 
   <!-- Sitewide styles -->
   <link rel="stylesheet" href="./styles/main.css" />
@@ -50,7 +51,8 @@
   <div class="nav-actions desktop-only">
     <button class="lang-btn">🌐 EN</button>
     <a href="./pages/login.html" class="profile-btn">Log In</a>
-    <a href="./pages/sign.html" class="btn-gradient">Get Started</a>
+    <a href="./pages/sign.html" class="btn-gradient">Sign Up</a>
+    <div id="profileDiv" style="display:none; align-items:center; gap:8px;"></div>
   </div>
 
   <!-- Mobile Hamburger -->
@@ -65,20 +67,21 @@
       <a href="./pages/News.html">Newsletters</a>
       <a href="./pages/deploy.html">Deploy</a>
       <a href="./pages/about.html">About</a>
-      <a href="./sign.html" class="btn-gradient">Get Started</a>
-      <a href="./login.html" class="profile-btn">Log In</a>
+      <a href="./pages/sign.html" class="btn-gradient">Sign Up</a>
+      <a href="./pages/login.html" class="profile-btn">Log In</a>
+      <button class="log-out">Log Out</button> <!--   it is styled in main.css to be displayed none -->
     </div>
 
     <!-- Profile section -->
     <div class="menu-profile">
-      <img src="./assets/profile-placeholder.png" alt="User Avatar" class="profile-avatar">
+      <img src="./asssets/ChatGPT Image Aug 18, 2025, 09_11_20 PM.png" alt="User Avatar" class="profile-avatar">
       <div class="profile-info">
         <p class="profile-name">John Doe</p>
         <p class="profile-company">My Company</p>
         <div class="storage-bar">
-          <div class="storage-fill" style="width: 40%;"></div>
+          <div class="storage-fill"></div>
         </div>
-        <p class="storage-text">40% used</p>
+        <p class="storage-text">100% used</p>
       </div>
     </div>
   </div>
@@ -173,7 +176,7 @@
     </div>
 
     <!-- Send Button -->
-    <button type="submit" class="send-btn">Send Newsletter</button>
+    <button id="send" type="submit" class="send-btn">Send Newsletter</button>
   </form>
 </section>
 <!-- Footer -->
@@ -211,20 +214,6 @@
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
 </script>
-
-
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-      if (currentUser) {
-        document.getElementById("user-name").textContent = currentUser.name || "User";
-        if (currentUser.avatar) {
-          document.getElementById("user-avatar").src = currentUser.avatar;
-        }
-      }
-    });
-  </script>
 
 </body>
 </html>

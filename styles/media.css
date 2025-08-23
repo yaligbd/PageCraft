@@ -3,12 +3,11 @@
    ============================ */
 
 /* Tablets and below */
-@media (max-width: 900px) {
+ @media (max-width: 900px) {
   .navbar {
     padding: 15px 25px;
   }
 
-  /* Hide nav links by default, show with .show */
   .nav-links {
     position: absolute;
     top: 70px;
@@ -28,7 +27,6 @@
     display: flex;
   }
 
-  /* Hamburger shows on mobile */
   .hamburger {
     display: flex;
   }
@@ -63,7 +61,7 @@
   .preview-container {
     height: 350px;
   }
-}
+} 
 
 /* Small screens (phones) */
 @media (max-width: 480px) {
@@ -98,6 +96,48 @@
     align-items: flex-end;
     gap: 0.5rem;
   }
+  .preview-header {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+
+/* OPTIONAL: hide "Live Preview" label on small screens to keep it to two rows */
+/* remove this block if you want to keep the label */
+.preview-header > span {
+  display: none;
+}
+
+/* row 1 — device buttons container */
+.preview-controls {
+  order: 1;
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  justify-content: space-between;  /* buttons spread across row */
+}
+.preview-controls .preview-btn {
+  flex: 1 1 0;                     /* equal widths */
+  min-width: 0;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+/* row 2 — arrows */
+.style-arrows {
+  order: 2;
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  justify-content: center;         /* arrows centered */
+  margin-left: 0;                  /* override desktop's margin-left:auto */
+}
+.style-arrow {
+  padding: 8px 12px;
+  min-width: 44px;
+  line-height: 1;
+}
 }
 
 /* ============================
@@ -158,9 +198,10 @@
 }
 
 /* Mobile only */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .nav-links { display: none; }
-  .hamburger { display: block; margin-left: auto; }
+  .hamburger { display: none; margin-left: auto; }
+
 
   .hamburger-menu {
     display: none;
@@ -249,7 +290,7 @@
 .desktop-only { display: flex; align-items: center; gap: 1rem; }
 .mobile-only { display: none; }
 
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
   .nav-links { display: none; }
   .desktop-only { display: none; }
   .mobile-only { display: block; margin-left: auto; }

@@ -1,4 +1,4 @@
-@import url(./hamburger.css);
+
 @import url(./media.css);
 @import url(./news.css);
 @import url(./3D.css);
@@ -58,16 +58,33 @@ body {
 /* Allow the menu to overflow the hero */
 .hero { overflow: visible; }
 
+.profile-avatar{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  object-fit:cover;
+  border:1px solid rgba(101, 83, 239, 0.799);
+  cursor:pointer;
+}
+.log-out{
+  display:none;
+  margin:6px; 
+  padding: 8px 16px;
+  color:white;
+  border:1px solid rgba(155, 155, 155, 1); 
+  border-radius:15px; 
+  background: linear-gradient(90deg, #c0392b 0%, #e17055 100%); 
+  cursor:pointer;
+}
 
 /* New Navbar Layout */
 .navbar {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   padding: 20px 40px;
   background: rgba(118, 118, 118, 0.3);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   position: relative;
   z-index: 2000;
 }
@@ -437,6 +454,27 @@ body {
     outline: none;
     border-color: #3498db;
 }
+/* style switcher arrows) */
+.style-arrows {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-left: auto; /* push to the far right of the header row */
+}
+
+.style-arrow {
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.35);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.style-arrow:hover {
+  background: rgba(255,255,255,0.28);
+}
+
 
 .preview-panel {
     background: white;
@@ -457,6 +495,7 @@ body {
 .preview-controls {
     display: flex;
     gap: 10px;
+    margin-left:1vw;
 }
 
 .preview-btn {

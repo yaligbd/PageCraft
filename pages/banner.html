@@ -7,6 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="../scripts/3D.JS"></script>
     <script type="module" src="../scripts/index.js"></script>
+    <script src="../scripts/login.js"></script>
   <link rel="stylesheet" href="../styles/main.css" />
   <link rel="stylesheet" href="../styles/media.css" />
 </head>
@@ -47,7 +48,8 @@
   <div class="nav-actions desktop-only">
     <button class="lang-btn">🌐 EN</button>
     <a href="./login.html" class="profile-btn">Log In</a>
-    <a href="./sign.html" class="btn-gradient">Get Started</a>
+    <a href="./sign.html" class="btn-gradient">Sign Up</a>
+    <div id="profileDiv" style="display:none; align-items:center; gap:8px;"></div>
   </div>
 
   <!-- Mobile Hamburger -->
@@ -64,11 +66,12 @@
         <a href="./about.html">About</a>
         <a href="./sign.html" class="btn-gradient">Get Started</a>
         <a href="./login.html" class="profile-btn">Log In</a>
+              <button class="log-out">Log Out</button> <!--   it is styled in main.css to be displayed none -->
     </div>
 
     <!-- Profile section -->
     <div class="menu-profile">
-      <img src="./assets/profile-placeholder.png" alt="User Avatar" class="profile-avatar">
+       <img src="../asssets/ChatGPT Image Aug 18, 2025, 09_11_20 PM.png" alt="User Avatar" class="profile-avatar">
       <div class="profile-info">
         <p class="profile-name">John Doe</p>
         <p class="profile-company">My Company</p>
@@ -147,7 +150,7 @@
             <button class="control-btn" onclick="updateSelectedElement()">Update Element</button>
             <button class="control-btn delete-btn" onclick="deleteSelectedElement()">Delete Element</button>
             <button class="control-btn delete-btn">Clear All</button>
-            <button class="download-btn" onclick="downloadBanner()">Save Banner</button>
+            <button id="send" class="download-btn" onclick="downloadBanner()">Save Banner</button>
           </div>
         </div>
 
@@ -155,19 +158,6 @@
     </div>
   </section>
 
-  <!-- Newsletter Section -->
-  <section class="newsletter-section">
-    <div class="container">
-      <div class="newsletter-content">
-        <h3>Stay Updated</h3>
-        <p>Get the latest updates and design tips delivered to your inbox.</p>
-        <form class="newsletter-form">
-          <input type="email" placeholder="Enter your email address" class="newsletter-input">
-          <button type="submit" class="newsletter-btn">Subscribe</button>
-        </form>
-      </div>
-    </div>
-  </section>
   <!-- Footer -->
 <footer class="site-footer">
   <div class="footer-container">

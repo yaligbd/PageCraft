@@ -7,6 +7,7 @@
 
   <!-- Scripts (same pattern as other pages) -->
   <script type="module" src="../scripts/index.js"></script>
+      <script src="../scripts/login.js"></script>
 
   <!-- Your site styles -->
   <link rel="stylesheet" href="../styles/main.css" />
@@ -52,6 +53,7 @@
         <button class="lang-btn">🌐 EN</button>
         <a href="./login.html" class="profile-btn">Log In</a>
         <a href="./sign.html" class="btn-gradient">Get Started</a>
+            <div id="profileDiv" style="display:none; align-items:center; gap:8px;"></div>
       </div>
 
       <!-- Mobile hamburger -->
@@ -68,6 +70,7 @@
           <a href="./about.html" role="menuitem">About</a>
           <a href="./sign.html" class="btn-gradient">Get Started</a>
           <a href="./login.html" class="profile-btn">Log In</a>
+                <button class="log-out">Log Out</button> <!--   it is styled in main.css to be displayed none -->
         </div>
 
         <!-- Mobile profile block -->
