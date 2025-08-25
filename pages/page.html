@@ -108,9 +108,9 @@
                     <div class="preview-header">
                         <span>Live Preview</span>
                         <div class="preview-controls">
-                            <button class="preview-btn" onclick="setPreviewMode('Style 1')" data-mode="Style 1">Style 1</button>
-                            <button class="preview-btn" onclick="setPreviewMode('Style 2')" data-mode="Style 2">Style 2</button>
-                            <button class="preview-btn" onclick="setPreviewMode('Style 3')" data-mode="Style 3">Style 3</button>
+                            <button class="preview-btn" data-mode="Style 1">Style 1</button>
+                            <button class="preview-btn" data-mode="Style 2">Style 2</button>
+                            <button class="preview-btn" data-mode="Style 3">Style 3</button>
                         </div>
                         <!-- Template style switcher arrows -->
                         <div class="style-arrows">
@@ -131,19 +131,19 @@
                     <div class="control-group">
                         <label>Background Color</label>
                         <div class="color-options">
-                            <div class="color-option" data-color="#ffffff" style="background: #ffffff;"></div>
-                            <div class="color-option" data-color="linear-gradient(230deg, #584dff 0%, #ffffff 30%, #ffffff 70%, #cca5ff 100%)" style="background: linear-gradient(230deg, #584dff 0%, #ffffff 30%, #ffffff 70%, #cca5ff 100%);"></div>
-                            <div class="color-option" data-color="linear-gradient(115deg, #ffffff 0%, #a8dfff 45%, #7bfdff 55%, #ffffff 100%)" style="background: linear-gradient(115deg, #ffffff 0%, #a8dfff 45%, #7bfdff 55%, #ffffff 100%);"></div>
-                            <div class="color-option" data-color="#dee2e6" style="background: #ffffbc;"></div>
-                            <div class="color-option" data-color="#1a1a1a" style="background: #858585;"></div>
-                            <div class="color-option" data-color="#1a1a1a" style="background: #000000;"></div>
+                            <div class="color-option" onclick="changeBackground('#ffffff')" data-color="#ffffff" style="background: #ffffff;"></div>
+                            <div class="color-option" onclick="changeBackground('linear-gradient(230deg, #584dff 0%, #ffffff 30%, #ffffff 70%, #cca5ff 100%)')" data-color="linear-gradient(230deg, #584dff 0%, #ffffff 30%, #ffffff 70%, #cca5ff 100%)" style="background: linear-gradient(230deg, #584dff 0%, #ffffff 30%, #ffffff 70%, #cca5ff 100%);"></div>
+                            <div class="color-option" onclick="changeBackground('linear-gradient(115deg, #ffffff 0%, #a8dfff 45%, #7bfdff 55%, #ffffff 100%)')" data-color="linear-gradient(115deg, #ffffff 0%, #a8dfff 45%, #7bfdff 55%, #ffffff 100%)" style="background: linear-gradient(115deg, #ffffff 0%, #a8dfff 45%, #7bfdff 55%, #ffffff 100%);"></div>
+                            <div class="color-option" onclick="changeBackground('#ffffbc')" data-color="#ffffbc" style="background: #ffffbc;"></div>
+                            <div class="color-option" onclick="changeBackground('#858585')" data-color="#858585" style="background: #858585;"></div>
+                            <div class="color-option" onclick="changeBackground('#000000')" data-color="#000000" style="background: #000000;"></div>
                         </div>
                     </div>
 
                     <div class="control-group">
                         <label>Add Elements</label>
                         <button class="control-btn" onclick="addElement('h1')">Add H1 Heading</button>
-                        <button class="control-btn" onclick="addElement('h2')">Add H3 Heading</button>
+                        <button class="control-btn" onclick="addElement('h3')">Add H3 Heading</button>
                         <button class="control-btn" onclick="addElement('pic')">Add a Picture</button>
                         <button class="control-btn" onclick="addElement('p')">Add Paragraph</button>
                     </div>
@@ -152,18 +152,18 @@
                         <label>Element Editor</label>
                         <input type="text" id="element-text" placeholder="Enter text content" class="control-input">
                         <select id="element-color" class="control-select">
-                            <option value="#ffffff">white</option>
-                            <option value="#000000">Black</option>
-                            <option value="#666666">Gray</option>
-                            <option value="#7210fc">purple</option>
-                            <option value="#e74c3c">Red</option>
-                            <option value="#3498db">Blue</option>
-                            <option value="#2ecc71">Green</option>
+                            <option class="background-option" onclick="changeColor('#ffffff')" value="#ffffff">white</option>
+                            <option class="background-option" onclick="changeColor('#000000')" value="#000000">Black</option>
+                            <option class="background-option" onclick="changeColor('#666666')" value="#666666">Gray</option>
+                            <option class="background-option" onclick="changeColor('#7210fc')" value="#7210fc">purple</option>
+                            <option class="background-option" onclick="changeColor('#e74c3c')" value="#e74c3c">Red</option>
+                            <option class="background-option" onclick="changeColor('#3498db')" value="#3498db">Blue</option>
+                            <option class="background-option" onclick="changeColor('#2ecc71')" value="#2ecc71">Green</option>
                         </select>
                         <button class="control-btn" onclick="updateSelectedElement()">Update Element</button>
                         <button class="control-btn delete-btn" onclick="deleteSelectedElement()">Delete Element</button>
-                        <button class="control-btn delete-btn">Clear All</button>
-                        <button id="send" class="download-btn" onclick="downloadPage()">Save Page</button>
+                        <button class="control-btn delete-btn" onclick="deletePage()">Clear All</button>
+                        <button id="send" class="download-btn">Save Page</button>
                     </div>
                 </div>
             </div>

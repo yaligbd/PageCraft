@@ -1,3 +1,15 @@
+
+const PAGES_KEY = "pc_pages";
+const getPages = () => JSON.parse(localStorage.getItem(PAGES_KEY) || "[]");
+
+
+
+
+
+
+
+
+
 const hamburger = document.getElementById("hamburger");
 const menu = document.getElementById("hamburger-menu");
 const navLinks = document.querySelector(".nav-links");

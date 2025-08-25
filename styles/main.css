@@ -497,6 +497,10 @@ body {
     gap: 10px;
     margin-left:1vw;
 }
+.preview-element.selected {
+  outline: 2px solid dodgerblue;
+  outline-offset: 2px;
+}
 
 .preview-btn {
     background: rgba(255, 255, 255, 0.2);
