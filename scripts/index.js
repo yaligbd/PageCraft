@@ -1,7 +1,82 @@
 
 const PAGES_KEY = "pc_pages";
-const getPages = () => JSON.parse(localStorage.getItem(PAGES_KEY) || "[]");
 
+
+function getPages(){
+  const pages = localStorage.getItem(PAGES_KEY);
+  return pages ? JSON.parse(pages) : [];
+}
+function renderSavedPages(){
+  const grid = document.querySelector("#pages .card-grid");
+  if(!grid) return; 
+
+  const slots = Array.from(grid.querySelectorAll(".empty-card"));
+  const pages = getPages();
+  if(pages.length === 0) return;
+
+  const project = pages[0];
+  const firstSlot = slots[0];
+  if(!firstSlot || !project) return;
+
+  // replace the empty slot markup with a simple saved-card
+  firstSlot.classList.add("saved-card");
+  firstSlot.innerHTML = `
+     <div class="card-body">
+       <div class="card-title" contenteditable="true" data-id="${project.id}" title="Click to rename">${project.name}</div>
+        <div class="card-date">${new Date(project.createdAt).toLocaleString()}</div>
+        <div class="card-actions">
+        <button class="edit-btn" data-id="${project.id}">Edit</button>
+        <button class="download-btn" data-id="${project.id}">Download</button>
+       </div>
+     </div>`;
+  firstSlot.style.background = project.bg || "#ffffff";
+
+          //i need to learn this better
+grid.addEventListener("blur", (e) => {
+  const t = e.target;
+  if (!t.classList.contains("card-title")) return;
+
+  const id = t.dataset.id;
+  const list = getPages();
+  const i = list.findIndex(x => x.id === id);
+  if (i !== -1) {
+    const newName = t.textContent.trim();
+    if (newName) {
+      list[i].name = newName;
+      localStorage.setItem(PAGES_KEY, JSON.stringify(list));
+    }
+  }
+}, true); // <-- capture=true so blur is caught on the grid
+
+grid.addEventListener("click", (e) => {
+  const btn = e.target.closest("button");
+  if (!btn) return;
+
+  const id = btn.dataset.id;
+  if (btn.classList.contains("edit-btn")) {
+    // go to builder with ?id=...
+    location.href = `./pages/page.html?id=${encodeURIComponent(id)}`;
+  } else if (btn.classList.contains("download-btn")) {
+    const list = getPages();
+    const pg = list.find(x => x.id === id);
+    if (!pg) return;
+
+    const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${pg.name}</title></head>
+      <body style="background:${pg.bg || "#fff"};">
+        <div>${pg.html}</div>
+      </body></html>`;
+    const blob = new Blob([html], { type: "text/html" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `${pg.name.replace(/\s+/g,"_")}.html`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+});
+
+
+  console.log("Rendering pages:", pages);
+}
 
 
 
@@ -32,7 +107,6 @@ if (hamburger && menu) {
     }
   });
 }
-
 
 //navbar handeling
 document.addEventListener("DOMContentLoaded", () => {
@@ -105,3 +179,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+document.addEventListener("DOMContentLoaded", renderSavedPages);
