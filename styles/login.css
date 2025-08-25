@@ -3,7 +3,7 @@
 /* 1. Full-page animated gradient background */
 body {
   width:100%;
-  margin: 0;
+  padding-top: 10vh;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
@@ -202,7 +202,20 @@ body {
 #error-msg.visible {
   display: block;
 }
-
+.navbar {
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(44,62,80,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  z-index: 1000;
+}
 @media (max-width: 480px) {
   .login-form{
     padding: 1rem;
