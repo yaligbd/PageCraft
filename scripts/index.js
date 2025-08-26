@@ -1,4 +1,12 @@
 
+// TODO:
+// when the user isnt logged in not load ant project
+// make the delet project work
+// make the storage bar display some sort of data
+// move between p b n 
+//fixing navbar highlits
+
+
 const PAGES_KEY = "pc_pages";
 let emptyCard = getPages().length - 1;
 
@@ -62,7 +70,7 @@ grid.addEventListener("click", (e) => {
   } else if (btn.classList.contains("download-btn")) {
     const list = getPages();
     const pg = list.find(x => x.id === id);
-    if (!pg) return;
+    if (!pg) return false;
 
     const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${pg.name}</title></head>
       <body style="background:${pg.bg || "#fff"};">

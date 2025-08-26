@@ -1,10 +1,15 @@
 
+// TODO:
+// saving photos bug
+
+
 
 const PAGES_KEY = "pc_pages";
 
 let templateIndex = 0;       // 0-2 templates
 let selectedEl = null;       // currently selected element
 let currentBg = "#ffffff";   // actual page background color
+let editingId = null;//old project
 
 const $id = (id) => document.getElementById(id);
 const previewEl = () => $id("preview-content");
@@ -13,7 +18,7 @@ const previewEl = () => $id("preview-content");
 const templates = [
     // 1. Resume Website
     () => `
-        <article class="resume-article" data-style="resume" style="height: 100hv;">
+        <article class="resume-article" data-style="resume" style="height: 100hv; padding: 10vw 5vh; display:flex; flex-direction: column;">
             <h1 class="preview-element" data-type="h1">Sr. page crafter</h1>
             <h2 class="preview-element" data-type="h2">Co-founder, Apple Inc.</h2>
             <p class="preview-element" data-type="p">
@@ -40,7 +45,7 @@ const templates = [
     `,
     // 2. News Article
     () => `
-        <article class="news-article" data-style="news" style="height: 100hv;>
+        <article class="news-article" data-style="news" style="height: 100hv; padding: 10vw 5vh; display:flex; flex-direction: column;">
             <h1 class="preview-element" data-type="h1">Tech Conference 2024: Innovations Unveiled</h1>
             <p class="preview-element" data-type="p" style="opacity:.8; margin-top:4px;">
                 By Alex Smith · ${new Date().toLocaleDateString()}
@@ -61,7 +66,7 @@ const templates = [
     `,
     // 3. Publicity Landing Page
     () => `
-        <article class="product-landing" data-style="product" style="height: 100hv;>
+        <article class="product-landing" data-style="product" style="height: 100hv; padding: 10vw 5vh; display:flex; flex-direction: column;">
             <img class="preview-element" data-type="img"
                      src="" alt="Product image"
                      style="display:none; max-width:100%; max-height:50vh; height:auto; object-fit:contain; border-radius:16px; margin:10px 0 18px;" />
@@ -76,7 +81,18 @@ const templates = [
         </article>
     `
 ];
-
+function getProjectIdFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("id"); // string or null
+}
+function loadProjectIfEditing(){
+    if(!editingId) return null;
+    const list = getPages();
+    const i = list.findIndex(p => p.id === editingId);
+    if(i === -1) return null;
+    const project = list[i];
+    return {project, index: i};
+}
 function renderTemplate() {
     const area = previewEl();
     area.innerHTML = templates[templateIndex]();
@@ -285,6 +301,20 @@ function downloadPage(){
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    editingId = getProjectIdFromURL();
+    console.log("editing id", editingId);
+    const found = loadProjectIfEditing();
+    if(found){
+        templateIndex = (typeof found.project.style === "number") ? found.project.style : 0;
+        renderTemplate();
+        const area = document.querySelector("#preview-content");
+        if(area){
+            area.innerHTML = found.project.html;
+            area.style.background = found.project.bg || "#fff";
+        }
+        currentBg = found.project.bg || "#fff";
+        selectedEl = null;
+    }
     renderTemplate();
     wirePreviewSelection();
     wireArrows();
