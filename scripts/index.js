@@ -1,6 +1,6 @@
 
 const PAGES_KEY = "pc_pages";
-
+let emptyCard = getPages().length - 1;
 
 function getPages(){
   const pages = localStorage.getItem(PAGES_KEY);
@@ -14,8 +14,10 @@ function renderSavedPages(){
   const pages = getPages();
   if(pages.length === 0) return;
 
-  const project = pages[0];
-  const firstSlot = slots[0];
+  const count = Math.min(pages.length, slots.length);
+  for(let i = 0; i < count; i++){
+  const project = pages[i];
+  const firstSlot = slots[i];
   if(!firstSlot || !project) return;
 
   // replace the empty slot markup with a simple saved-card
@@ -25,13 +27,13 @@ function renderSavedPages(){
        <div class="card-title" contenteditable="true" data-id="${project.id}" title="Click to rename">${project.name}</div>
         <div class="card-date">${new Date(project.createdAt).toLocaleString()}</div>
         <div class="card-actions">
-        <button class="edit-btn" data-id="${project.id}">Edit</button>
+        <button class="control-btn edit-btn" data-id="${project.id}">Edit Project</button>
         <button class="download-btn" data-id="${project.id}">Download</button>
+        <button class="control-btn delete-btn" data-id"${project.id}" onclick="deletePage()">Delete Project</button>
        </div>
      </div>`;
   firstSlot.style.background = project.bg || "#ffffff";
-
-          //i need to learn this better
+  }          
 grid.addEventListener("blur", (e) => {
   const t = e.target;
   if (!t.classList.contains("card-title")) return;
@@ -46,8 +48,9 @@ grid.addEventListener("blur", (e) => {
       localStorage.setItem(PAGES_KEY, JSON.stringify(list));
     }
   }
-}, true); // <-- capture=true so blur is caught on the grid
+}, true); 
 
+//made by gpt
 grid.addEventListener("click", (e) => {
   const btn = e.target.closest("button");
   if (!btn) return;

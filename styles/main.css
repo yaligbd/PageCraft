@@ -378,6 +378,11 @@ body {
 .delete-btn:hover {
     background: linear-gradient(135deg, #ef5c4c 0%, #c12e2e 100%);
 }
+.edit-btn{
+  margin-top: 5vh;
+  padding: 10px 0;
+  font-size: medium;
+}
 
 .download-btn {
     width: 100%;

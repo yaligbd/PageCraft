@@ -13,7 +13,7 @@ const previewEl = () => $id("preview-content");
 const templates = [
     // 1. Resume Website
     () => `
-        <article class="resume-article" data-style="resume">
+        <article class="resume-article" data-style="resume" style="height: 100hv;">
             <h1 class="preview-element" data-type="h1">Sr. page crafter</h1>
             <h2 class="preview-element" data-type="h2">Co-founder, Apple Inc.</h2>
             <p class="preview-element" data-type="p">
@@ -40,7 +40,7 @@ const templates = [
     `,
     // 2. News Article
     () => `
-        <article class="news-article" data-style="news">
+        <article class="news-article" data-style="news" style="height: 100hv;>
             <h1 class="preview-element" data-type="h1">Tech Conference 2024: Innovations Unveiled</h1>
             <p class="preview-element" data-type="p" style="opacity:.8; margin-top:4px;">
                 By Alex Smith · ${new Date().toLocaleDateString()}
@@ -61,7 +61,7 @@ const templates = [
     `,
     // 3. Publicity Landing Page
     () => `
-        <article class="product-landing" data-style="product">
+        <article class="product-landing" data-style="product" style="height: 100hv;>
             <img class="preview-element" data-type="img"
                      src="" alt="Product image"
                      style="display:none; max-width:100%; max-height:50vh; height:auto; object-fit:contain; border-radius:16px; margin:10px 0 18px;" />
@@ -298,6 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     downloadPage();
     alert("Page saved!");
+    window.location.href = "../index.html";
     });
 
 });
