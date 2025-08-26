@@ -103,18 +103,20 @@
     
     <!-- Storage Panel -->
     <div class="storage-panel">
-      <div class="storage-label">Storage Used: <span id="storage-percent">0%</span></div>
+      <div class="storage-label">Storage Used: <span id="storage-percent">40%</span></div>
       <div class="storage-bar">
-        <div class="storage-fill" style="width: 0%;" id="storage-fill"></div>
+        <div class="storage-fill" style="width: 40%;" id="storage-fill"></div>
       </div>
     </div>
 
     <!-- Category Selector -->
-    <div class="dashboard-buttons">
-      <p class="dashboard-tab active">Pages</p>
-      <p class="dashboard-tab">Banners</p>
-      <p class="dashboard-tab">Newsletters</p>
-    </div>
+<!-- Category Selector -->
+<div class="dashboard-buttons">
+  <p id="tab-pages"   class="dashboard-tab active" onclick="PBN('p')">Pages</p>
+  <p id="tab-banners" class="dashboard-tab"        onclick="PBN('b')">Banners</p>
+  <p id="tab-news"    class="dashboard-tab"        onclick="PBN('n')">Newsletters</p>
+</div>
+
 
     <!-- Pages -->
     <div class="category-section" id="pages">

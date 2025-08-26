@@ -1,8 +1,4 @@
 
-// TODO:
-// saving photos bug
-
-
 
 const PAGES_KEY = "pc_pages";
 
@@ -278,7 +274,13 @@ function getPages(){
     return raw ? JSON.parse(raw) : []; //turns json into array
 }
 function setPages(list){
+    try{
     localStorage.setItem(PAGES_KEY, JSON.stringify(list));
+    } catch(err){
+        alert("Could not save to local storage, try deleting projects or using smaller images");
+        throw err;
+    }
+    
 }
 function buildProjectFromPreview() {
   const area = document.getElementById("preview-content"); // where your page lives
@@ -306,7 +308,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const found = loadProjectIfEditing();
     if(found){
         templateIndex = (typeof found.project.style === "number") ? found.project.style : 0;
-        renderTemplate();
         const area = document.querySelector("#preview-content");
         if(area){
             area.innerHTML = found.project.html;
@@ -315,7 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
         currentBg = found.project.bg || "#fff";
         selectedEl = null;
     }
-    renderTemplate();
+    if(!found){renderTemplate();}
     wirePreviewSelection();
     wireArrows();
     document.querySelectorAll(".preview-btn").forEach(btn => {

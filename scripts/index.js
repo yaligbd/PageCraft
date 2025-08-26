@@ -1,14 +1,15 @@
 
 // TODO:
-// when the user isnt logged in not load ant project
-// make the delet project work
-// make the storage bar display some sort of data
-// move between p b n 
-//fixing navbar highlits
+// make the storage bar display some sort of data(preferly the actual data left in local storage) -1
+// move between pages banners newsletters to see all the cards -2
+// fixing navbar highlits -3
 
-
+const hamburger = document.getElementById("hamburger");
+const menu = document.getElementById("hamburger-menu");
+const navLinks = document.querySelector(".nav-links");
+const STORAGE_QUOTA = 5 * 1024 * 1024;
 const PAGES_KEY = "pc_pages";
-let emptyCard = getPages().length - 1;
+
 
 function getPages(){
   const pages = localStorage.getItem(PAGES_KEY);
@@ -20,13 +21,14 @@ function renderSavedPages(){
 
   const slots = Array.from(grid.querySelectorAll(".empty-card"));
   const pages = getPages();
+
   if(pages.length === 0) return;
 
   const count = Math.min(pages.length, slots.length);
   for(let i = 0; i < count; i++){
   const project = pages[i];
   const firstSlot = slots[i];
-  if(!firstSlot || !project) return;
+  if(!firstSlot || !project) continue;
 
   // replace the empty slot markup with a simple saved-card
   firstSlot.classList.add("saved-card");
@@ -37,11 +39,12 @@ function renderSavedPages(){
         <div class="card-actions">
         <button class="control-btn edit-btn" data-id="${project.id}">Edit Project</button>
         <button class="download-btn" data-id="${project.id}">Download</button>
-        <button class="control-btn delete-btn" data-id"${project.id}" onclick="deletePage()">Delete Project</button>
+        <button class="control-btn delete-btn" data-id="${project.id}">Delete Project</button>
        </div>
      </div>`;
   firstSlot.style.background = project.bg || "#ffffff";
-  }          
+  }    
+  //project name handeling      
 grid.addEventListener("blur", (e) => {
   const t = e.target;
   if (!t.classList.contains("card-title")) return;
@@ -58,7 +61,7 @@ grid.addEventListener("blur", (e) => {
   }
 }, true); 
 
-//made by gpt
+
 grid.addEventListener("click", (e) => {
   const btn = e.target.closest("button");
   if (!btn) return;
@@ -82,24 +85,53 @@ grid.addEventListener("click", (e) => {
     a.download = `${pg.name.replace(/\s+/g,"_")}.html`;
     a.click();
     URL.revokeObjectURL(a.href);
+  }else if(btn.classList.contains("delete-btn")){
+    const id = btn.dataset.id;
+    if(!id) return;
+
+    const list = getPages();
+    const i = list.findIndex(p => p.id === id);
+    if(i !== -1){
+      list.splice(i, 1);//removes 1 item rfom index i
+      localStorage.setItem(PAGES_KEY, JSON.stringify(list));
+    }
+    const card = btn.closest(".empty-card");
+    if(card){
+      card.classList.remove("saved-card");
+      card.style.background = "";
+      card.textContent = "Empty Project Slot";
+    }
+
   }
 });
-
-
   console.log("Rendering pages:", pages);
+
+}
+function PBN(key) {
+  // Map the click to the right tab + section
+  const map = {
+    p: { tab: '#tab-pages',   section: '#pages' },
+    b: { tab: '#tab-banners', section: '#banners' },
+    n: { tab: '#tab-news',    section: '#newsletters' } // <-- actual section id
+  };
+  const target = map[key];
+  if (!target) return;
+
+  // 1) Tabs: toggle the .active underline/colour
+  document.querySelectorAll('.dashboard-buttons .dashboard-tab')
+    .forEach(el => el.classList.remove('active'));
+  const tabEl = document.querySelector(target.tab);
+  if (tabEl) tabEl.classList.add('active');
+
+  // 2) Sections: hide all, then show the chosen one
+  document.querySelectorAll('.category-section')
+    .forEach(sec => sec.classList.add('hidden'));
+  const secEl = document.querySelector(target.section);
+  if (secEl) secEl.classList.remove('hidden');
 }
 
 
-
-
-
-
-
-
-const hamburger = document.getElementById("hamburger");
-const menu = document.getElementById("hamburger-menu");
-const navLinks = document.querySelector(".nav-links");
-
+//navbar+hamburger handeling 
 if (hamburger && menu) {
   hamburger.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -118,8 +150,6 @@ if (hamburger && menu) {
     }
   });
 }
-
-//navbar handeling
 document.addEventListener("DOMContentLoaded", () => {
   const allLinks = Array.from(
     document.querySelectorAll(".nav-links a, .hamburger-menu .menu-links a")
@@ -190,5 +220,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-
 document.addEventListener("DOMContentLoaded", renderSavedPages);
+
+document.addEventListener('DOMContentLoaded', () => {
+  PBN('p');
+});
+// expose for inline onclick handlers (because index.js is a module)
+window.PBN = PBN;
+
+
+
+

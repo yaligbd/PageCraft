@@ -8,6 +8,7 @@
   <script src="../scripts/3D.JS"></script>
     <script type="module" src="../scripts/index.js"></script>
     <script src="../scripts/login.js"></script>
+    <script src="../scripts/banners.js"></script>
   <link rel="stylesheet" href="../styles/main.css" />
   <link rel="stylesheet" href="../styles/media.css" />
 </head>
@@ -105,8 +106,8 @@
           <div class="preview-header">
             <span>Live Preview</span>
             <div class="preview-controls">
-              <button class="preview-btn" onclick="setBannerSize('250x250')">250 x 250</button>
-              <button class="preview-btn" onclick="setBannerSize('300x600')">300 x 600</button>
+              <button class="preview-btn" onclick="setBanner('0')" data-mode="small" >250 x 250</button>
+              <button class="preview-btn" onclick="setBanner('1')" data-mode="big">300 x 600</button>
             </div>
           </div>
           <div class="preview-container" id="preview-container">
@@ -133,7 +134,7 @@
             <label>Add Elements</label>
             <button class="control-btn" onclick="addElement('h1')">Add H1 Heading</button>
             <button class="control-btn" onclick="addElement('p')">Add Paragraph</button>
-            <button class="control-btn" onclick="addElement('img')">Add Image</button>
+            <button class="control-btn" onclick="changeBackground('img')">Add Background Image</button>
           </div>
 
           <div class="control-group">
