@@ -74,7 +74,6 @@ grid.addEventListener("click", (e) => {
 
   const id = btn.dataset.id;
   if (btn.classList.contains("edit-btn")) {
-    // go to builder with ?id=...
     location.href = `./pages/page.html?id=${encodeURIComponent(id)}`;
   } else if (btn.classList.contains("download-btn")) {
     const list = getPages();
@@ -162,7 +161,7 @@ grid.addEventListener("blur", (e) => {
 }, true); 
 
 
-grid.addEventListener("click", (e) => {
+grid.addEventListener("click", async (e) => {
   const btn = e.target.closest("button");
   if (!btn) return;
 
@@ -171,20 +170,11 @@ grid.addEventListener("click", (e) => {
     // go to builder with ?id=...
     location.href = `./pages/banner.html?id=${encodeURIComponent(id)}`;
   } else if (btn.classList.contains("download-btn")) {
-    const list = getBanners();
-    const pg = list.find(x => x.id === id);
-    if (!pg) return false;
+    const id = btn.dataset.id;                           // read the id we stored in data-id on the button
+    const item = getBanners().find(x => x.id === id);    // look up the saved banner record by id
+    if (!item) return;                                   // safety: record missing? bail out
 
-    const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${pg.name}</title></head>
-      <body style="background:${pg.bg || "#fff"};">
-        <div>${pg.html}</div>
-      </body></html>`;
-    const blob = new Blob([html], { type: "text/html" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = `${pg.name.replace(/\s+/g,"_")}.html`;
-    a.click();
-    URL.revokeObjectURL(a.href);
+    await exportBannerAsImage(item, { format: "png" });  // ✅ now 'await' is valid: we pause until the PNG/JPG is generated & downloaded
   }else if(btn.classList.contains("delete-btn")){
     const id = btn.dataset.id;
     if(!id) return;
@@ -193,7 +183,7 @@ grid.addEventListener("click", (e) => {
     const i = list.findIndex(p => p.id === id);
     if(i !== -1){
       list.splice(i, 1);//removes 1 item rfom index i
-      localStorage.setItem(PAGES_KEY, JSON.stringify(list));
+      localStorage.setItem(BANNERS_KEY, JSON.stringify(list));
     }
     const card = btn.closest(".empty-card");
     if(card){
@@ -229,10 +219,84 @@ function PBN(key) {
   const secEl = document.querySelector(target.section);
   if (secEl) secEl.classList.remove('hidden');
 }
+// Load a script and resolve when it finishes (or reject on error)
+function loadScript(src){
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = src;
+    s.async = true;
+    s.onload = resolve;
+    s.onerror = () => reject(new Error(`Failed to load: ${src}`));
+    document.head.appendChild(s);
+  });
+}
+/**
+ * Ensure the html-to-image library is available on window.
+ * Tries multiple CDNs, then a local copy.
+ */
 async function ensureHtmlToImage(){
-  
+  if (window.htmlToImage) return window.htmlToImage;
+
+  const candidates = [
+    // CDN #1
+    'https://unpkg.com/html-to-image@1.11.11/dist/html-to-image.min.js',
+    // CDN #2
+    'https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js',
+    // Local fallback — put the file at /scripts/vendor/html-to-image.min.js
+    './scripts/vendor/html-to-image.min.js'
+  ];
+
+  let lastErr;
+  for (const url of candidates){
+    try {
+      await loadScript(url);
+      if (window.htmlToImage) return window.htmlToImage;
+    } catch (err) {
+      lastErr = err;                   // remember and try next URL
+    }
+  }
+  throw lastErr || new Error('html-to-image failed to load');
 }
 
+async function exportBannerAsImage(item, {format = "png"} = {}){
+  //item  - a record from localStorage 
+  //opts  - { format: "png" | "jpg" }
+
+  const htmlToImage = await ensureHtmlToImage();
+
+  const host = document.createElement('div');
+  host.style.cssText = 'position:fixed; left:-99999px; top:-99999px;';
+  document.body.appendChild(host);
+
+  host.innerHTML = item.html;
+  const node = host.querySelector("#banner") || host.firstElementChild;
+
+  const pixelRatio = Math.max(2, window.devicePixelRatio || 1);          // 2x scale for crisper output on normal screens; keep HiDPI sharp
+  const opts = {                                                         // Options passed to html-to-image
+    pixelRatio,                                                          // Scale factor for the exported image
+    cacheBust: true,                                                     // Prevent stale cached assets
+    backgroundColor: '#ffffff',                                          // Solid white under transparent areas (esp. for JPGs)
+    quality: 0.95                                                        // Used by JPEG (ignored by PNG)
+  };
+
+  try{
+    const isJpg = (format.toLowerCase() === 'jpg') || (format.toLowerCase() === 'jpeg');
+    const dataUrl = isJpg
+      ? await htmlToImage.toJpeg(node, opts)                             // Produce a JPEG Data URL string if JPG requested
+      : await htmlToImage.toPng(node, opts);                             // Otherwise, produce a PNG Data URL string
+          
+    // 5) Build a safe filename and trigger a download
+    const base = (item.name || 'banner').replace(/\s+/g, '_');           // Replace spaces with underscores in the name
+    const ext  = isJpg ? 'jpg' : 'png';                                  // File extension based on chosen format
+    const a = document.createElement('a');                                // Create a hidden <a> element to simulate a download click
+    a.href = dataUrl;                                                     // Set the image data as the link target
+    a.download = `${base}.${ext}`;                                        // Suggest a filename to the browser
+    a.click();                                                            // Programmatically click to start the download
+
+  }finally{
+    host.remove();
+  }
+}
 
 //navbar+hamburger handeling 
 if (hamburger && menu) {
@@ -328,6 +392,7 @@ document.addEventListener("DOMContentLoaded", renderSavedBanners);
 
 document.addEventListener('DOMContentLoaded', () => {
   PBN('p');
+  PBN(location.hash === '#banners' ? 'b' : 'p');
 });
 // expose for inline onclick handlers (because index.js is a module)
 window.PBN = PBN;

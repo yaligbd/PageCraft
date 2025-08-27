@@ -9,6 +9,7 @@
   <script src="../scripts/3D.JS"></script>
     <script type="module" src="../scripts/index.js"></script>
         <script src="../scripts/login.js"></script>
+        <script src="../scripts/news.js"></script>
   <link rel="stylesheet" href="../styles/main.css" />
   <link rel="stylesheet" href="../styles/media.css" />
   <link rel="stylesheet" href="../styles/news.css" />
@@ -96,44 +97,135 @@
   </section>
 
   <!-- Newsletter Builder -->
-  <section class="newsletter-builder">
+    <!-- Page Editor Section -->
+    <section class="editor-section" id="editor">
+        <div class="container">
+            <h2 class="section-title">Newsletter Builder</h2>
+            
+            <div class="editor-grid">
+                
 
-      <h2 class="section-title">Newsletter Builder</h2>
-      <p class="section-description">Drag and drop your saved banners and landing pages to create a custom newsletter.</p>
+                <!-- Live Preview -->
+                <div class="preview-panel">
+                    <div class="preview-header">
+                        <span>Live Preview</span>
+                        <div class="preview-controls">
+                            <button class="preview-btn" data-mode="Style 1">Style 1</button>
+                            <button class="preview-btn" data-mode="Style 2">Style 2</button>
+                            <button class="preview-btn" data-mode="Style 3">Style 3</button>
+                        </div>
+                        <!-- Template style switcher arrows -->
+                        <div class="style-arrows">
+                        <span>Text Alignment</span>
+                              <button id="tpl-prev" class="style-arrow" aria-label="Previous style">⟵</button>
+                              <button id="tpl-next" class="style-arrow" aria-label="Next style">⟶</button>
+                        </div>
 
-    <!-- Newsletter Layout Grid -->
-    <div class="newsletter-layout">
-        
-      <h2>Newsletter Layout</h2>
-      <div class="newsletter-grid">
-        <div class="newsletter-slot">Drop here</div>
-        <div class="newsletter-slot">Drop here</div>
-        <div class="newsletter-slot">Drop here</div>
-        <div class="newsletter-slot">Drop here</div>
-        <div class="newsletter-slot">Drop here</div>
-        <div class="newsletter-slot">Drop here</div>
-      </div>
-      <div class="newsletter-controls">
-                <button class="control-btn delete-btn">Clear All</button>
-            <button id="send" class="download-btn" onclick="downloadBanner()">Save Newsletter</button>
+                    </div>
+                    <div class="preview-container" id="preview-container">
+                        <div class="preview-content" id="preview-content">
+                            <p class="placeholder-text">Your page content will appear here. Start by adding elements!</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Controls Panel -->
+                <div class="controls-panel">
+                    <div class="control-group">
+                        <label>Background Color</label>
+<div class="color-options">
+  <!-- 1) Aqua diagonal -->
+  <div class="color-option" title="Aqua diagonal"
+       style="background: linear-gradient(140deg, #90F7EC 0%, #32CCBC 100%);"
+       onclick="changeBackground('linear-gradient(140deg, #90F7EC 0%, #32CCBC 100%)')"></div>
+
+  <!-- 2) Sunset sweep -->
+  <div class="color-option" title="Sunset sweep"
+       style="background: linear-gradient(200deg, #FEE140 0%, #FA709A 100%);"
+       onclick="changeBackground('linear-gradient(200deg, #FEE140 0%, #FA709A 100%)')"></div>
+
+  <!-- 3) Radial mint→blue (focus top-left) -->
+  <div class="color-option" title="Radial mint → blue"
+       style="background: radial-gradient(circle at 30% 25%, #84fab0 0%, #8fd3f4 60%, #ffffff 100%);"
+       onclick="changeBackground('radial-gradient(circle at 30% 25%, #84fab0 0%, #8fd3f4 60%, #ffffff 100%)')"></div>
+
+  <!-- 4) Conic pastel wheel -->
+  <div class="color-option" title="Conic pastel wheel"
+       style="background: conic-gradient(from 90deg at 50% 50%, #6366f1 0 25%, #a78bfa 25% 50%, #f472b6 50% 75%, #22d3ee 75% 100%);"
+       onclick="changeBackground('conic-gradient(from 90deg at 50% 50%, #6366f1 0 25%, #a78bfa 25% 50%, #f472b6 50% 75%, #22d3ee 75% 100%)')"></div>
+
+  <!-- 5) Diagonal stripes (blue/cyan) -->
+  <div class="color-option" title="Diagonal stripes"
+       style="background: repeating-linear-gradient(45deg, #4facfe 0 10px, #4facfe 10px 20px, #00f2fe 20px 30px, #00f2fe 30px 40px);"
+       onclick="changeBackground('repeating-linear-gradient(45deg, #4facfe 0 10px, #4facfe 10px 20px, #00f2fe 20px 30px, #00f2fe 30px 40px)')"></div>
+
+  <!-- 6) Vertical stripes overlay + teal/blue base -->
+  <div class="color-option" title="Overlay stripes on gradient"
+       style="background:
+         repeating-linear-gradient(90deg, rgba(255,255,255,.16) 0 7px, rgba(255,255,255,0) 7px 14px),
+         linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);"
+       onclick="changeBackground('repeating-linear-gradient(90deg, rgba(255,255,255,.16) 0 7px, rgba(255,255,255,0) 7px 14px), linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%)')"></div>
+
+  <!-- 7) Checkerboard overlay + deep base -->
+                                <div class="color-option" onclick="changeBackground('#ffffff')" data-color="#ffffff" style="background: #ffffff;"></div>
+
+  <!-- 8) Polka dots overlay + pink base -->
+  <div class="color-option" title="Dots + pink base"
+       style="background:
+         radial-gradient(circle, rgba(255,255,255,.5) 2px, transparent 3px) 0 0/18px 18px repeat,
+         radial-gradient(circle, rgba(255,255,255,.35) 2px, transparent 3px) 9px 9px/18px 18px repeat,
+         linear-gradient(135deg, #ff7eb3 0%, #ff758c 100%);"
+       onclick="changeBackground('radial-gradient(circle, rgba(255,255,255,.5) 2px, transparent 3px) 0 0/18px 18px repeat, radial-gradient(circle, rgba(255,255,255,.35) 2px, transparent 3px) 9px 9px/18px 18px repeat, linear-gradient(135deg, #ff7eb3 0%, #ff758c 100%)')"></div>
+
+  <!-- 9) Soft mesh (multi radial blobs) -->
+  <div class="color-option" title="Soft mesh gradient"
+       style="background:
+         radial-gradient(35% 45% at 20% 30%, #FF9A9E 0%, transparent 60%),
+         radial-gradient(40% 45% at 80% 25%, #FBC2EB 0%, transparent 55%),
+         radial-gradient(45% 50% at 30% 80%, #A1C4FD 0%, transparent 55%),
+         linear-gradient(180deg, #fdfbfb 0%, #ebedee 100%);"
+       onclick="changeBackground('radial-gradient(35% 45% at 20% 30%, #FF9A9E 0%, transparent 60%), radial-gradient(40% 45% at 80% 25%, #FBC2EB 0%, transparent 55%), radial-gradient(45% 50% at 30% 80%, #A1C4FD 0%, transparent 55%), linear-gradient(180deg, #fdfbfb 0%, #ebedee 100%)')"></div>
+
+  <!-- 10) Dark aurora (blobs over night sky) -->
+  <div class="color-option" title="Dark aurora"
+       style="background:
+         radial-gradient(40% 60% at 20% 80%, rgba(16,185,129,.45), transparent 60%),
+         radial-gradient(35% 55% at 80% 20%, rgba(59,130,246,.45), transparent 60%),
+         linear-gradient(200deg, #0b1020 0%, #111827 100%);"
+       onclick="changeBackground('radial-gradient(40% 60% at 20% 80%, rgba(16,185,129,.45), transparent 60%), radial-gradient(35% 55% at 80% 20%, rgba(59,130,246,.45), transparent 60%), linear-gradient(200deg, #0b1020 0%, #111827 100%)')"></div>
+</div>
+
+
+                    </div>
+
+                    <div class="control-group">
+                        <label>Add Elements</label>
+                        <button class="control-btn" onclick="addElement('h1')">Add H1 Heading</button>
+                        <button class="control-btn" onclick="addElement('h3')">Add H3 Heading</button>
+                        <button class="control-btn" onclick="addElement('pic')">Add a Picture</button>
+                        <button class="control-btn" onclick="addElement('p')">Add Paragraph</button>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Element Editor</label>
+                        <input type="text" id="element-text" placeholder="Enter text content" class="control-input">
+                        <select id="element-color" class="control-select">
+                            <option class="background-option" onclick="changeColor('#ffffff')" value="#ffffff">white</option>
+                            <option class="background-option" onclick="changeColor('#000000')" value="#000000">Black</option>
+                            <option class="background-option" onclick="changeColor('#666666')" value="#666666">Gray</option>
+                            <option class="background-option" onclick="changeColor('#7210fc')" value="#7210fc">purple</option>
+                            <option class="background-option" onclick="changeColor('#e74c3c')" value="#e74c3c">Red</option>
+                            <option class="background-option" onclick="changeColor('#3498db')" value="#3498db">Blue</option>
+                            <option class="background-option" onclick="changeColor('#2ecc71')" value="#2ecc71">Green</option>
+                        </select>
+                        <button class="control-btn" onclick="updateSelectedElement()">Update Element</button>
+                        <button class="control-btn delete-btn" onclick="deleteSelectedElement()">Delete Element</button>
+                        <button class="control-btn delete-btn" onclick="deletePage()">Clear All</button>
+                        <button id="send" class="download-btn">Save Page</button>
+                    </div>
+                </div>
             </div>
-    </div>
-
-        <!-- Project Picker -->
-    <div class="project-picker">
-      <h2>Select Projects to Add</h2>
-      <div class="project-list">
-        <div class="project-card">250x250 Banner</div>
-        <div class="project-card">300x600 Banner</div>
-        <div class="project-card">Landing Page</div>
-        <div class="project-card">250x250 Banner</div>
-        <div class="project-card">Landing Page</div>
-      </div>
-    </div>
-
-
-
-  </section>
+        </div>
+    </section>
   <!-- Footer -->
 <footer class="site-footer">
   <div class="footer-container">

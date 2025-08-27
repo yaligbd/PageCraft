@@ -284,7 +284,7 @@ function downloadBanner(){
   const list = getSavedBanners();
   list.unshift(project);
   saveBanner(list);
-  window.location.href="../index.html";
+  window.location.href = "../index.html#banners";
 }
 
 document.addEventListener("DOMContentLoaded", () => {
