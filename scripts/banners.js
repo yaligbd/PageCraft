@@ -317,7 +317,7 @@ function downloadBanner(){
 document.addEventListener("DOMContentLoaded", () => {
     const id = getBannerIdFromURL();
     const loaded = id ? loadBannerFromStorage(id) : false;
-    if(!isloaded){
+    if(!loaded){
     renderBanners();
     wirePreviewSelection();
     }
