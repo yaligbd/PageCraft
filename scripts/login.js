@@ -265,6 +265,10 @@ function authFormHandler(){
     const form = document.querySelector("#auth-form");
     if(!form) return;
 
+    // prevent double-binding
+    if (form.dataset.wired === "1") return;
+    form.dataset.wired = "1";
+    
     const usernameEl = form.querySelector("input[name='username']");
     const passwordEl = form.querySelector("input[name='password']");
     const emailEl = form.querySelector("input[name='Email']"); // if present, we're in sign-up mode

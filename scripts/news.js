@@ -13,35 +13,84 @@ const previewEl = () => $id("preview-content");
 const templates = [
   // 1) Announcement / Launch
   () => `
-  <article class="nl-announcement" data-style="announce" style="padding: 32px; height:100vh; max-width: 720px; margin: 0 auto;">
-    <header style="text-align:center; margin-bottom: 18px;">
-      <h1 class="preview-element" data-type="h1" style="margin:0 0 4px;">We’re Launching Something New 🚀</h1>
-      <p class="preview-element" data-type="p" style="opacity:.85; margin:0;">${new Date().toLocaleDateString()}</p>
+  <style>
+    /* —— Scoped to the announcement article only —— */
+    #preview-content .nl-announcement{ --pad:32px; --radius:12px; --maxw:720px; }
+    #preview-content .nl-announcement{
+      box-sizing:border-box;
+      padding:var(--pad);
+      margin:0 auto;
+      width:min(100%, var(--maxw));
+      min-height:100vh;
+      line-height:1.55;
+    }
+    #preview-content .nl-announcement header{ text-align:center; margin-bottom:18px; }
+    #preview-content .nl-announcement h1{ margin:0 0 4px; font-size:clamp(1.25rem, 1.05rem + 1.8vw, 2.2rem); }
+    #preview-content .nl-announcement p{ margin:0.25rem 0 0; }
+    #preview-content .nl-announcement img{
+      width:100%; max-height:320px; height:auto; object-fit:cover;
+      border-radius:var(--radius); margin:16px 0;
+    }
+    #preview-content .nl-announcement .nl-lead{
+      margin-top:20px; display:grid; gap:10px; grid-template-columns:1fr 1fr; align-items:center;
+    }
+    #preview-content .nl-announcement .nl-lead input{
+      padding:10px 12px; border:1px solid #e5e7eb; border-radius:8px; min-width:0;
+    }
+    #preview-content .nl-announcement .nl-lead button{
+      grid-column:1/-1; padding:12px 16px; border:none; border-radius:8px; background:#2563eb; color:#fff; font-weight:700;
+    }
+    #preview-content .nl-announcement .preview-element[data-type="cta"]{
+      display:inline-block; background:#111; color:#fff; padding:12px 18px; border-radius:8px; text-decoration:none; font-weight:700; margin:14px 0;
+    }
+    #preview-content .nl-announcement footer{ margin-top:24px; opacity:.7; font-size:.9rem; }
+
+    /* ——— Breakpoints ——— */
+    /* Phones */
+    @media (max-width: 480px){
+      #preview-content .nl-announcement{ --pad:16px; --radius:10px; }
+      #preview-content .nl-announcement .nl-lead{ grid-template-columns:1fr; }
+      #preview-content .nl-announcement .preview-element[data-type="cta"]{ width:100%; text-align:center; }
+    }
+    /* Small tablets */
+    @media (min-width: 481px) and (max-width: 768px){
+      #preview-content .nl-announcement{ --pad:24px; }
+      #preview-content .nl-announcement img{ max-height:300px; }
+    }
+    /* Desktops */
+    @media (min-width: 769px){
+      #preview-content .nl-announcement{ --pad:32px; }
+      #preview-content .nl-announcement .nl-lead{ grid-template-columns:1fr 1fr; }
+    }
+    /* Large desktops */
+    @media (min-width: 1200px){
+      #preview-content .nl-announcement{ --maxw:840px; }
+    }
+  </style>
+
+  <article class="nl-announcement" data-style="announce">
+    <header>
+      <h1 class="preview-element" data-type="h1">We’re Launching Something New 🚀</h1>
+      <p class="preview-element" data-type="p" style="opacity:.85;">${new Date().toLocaleDateString()}</p>
     </header>
 
     <img class="preview-element" data-type="img"
          src="" alt="Hero"
-         style="display:none; width:100%; max-height:320px; height:auto; object-fit:cover; border-radius:12px; margin:16px 0;" />
+         style="display:none;" />
 
-    <p class="preview-element" data-type="p" style="line-height:1.55;">
+    <p class="preview-element" data-type="p">
       Big news! We’re excited to share the next step in our journey with you.
     </p>
 
-    <a href="#" class="preview-element" data-type="cta"
-       style="display:inline-block; background:#111; color:#fff; padding:12px 18px; border-radius:8px; text-decoration:none; font-weight:700; margin:14px 0;">
-       Learn More
-    </a>
+    <a href="#" class="preview-element" data-type="cta">Learn More</a>
 
-    <!-- Simple lead form (name+email) -->
-    <form class="nl-lead" style="margin-top:20px; display:grid; gap:10px; grid-template-columns:1fr 1fr; align-items:center;">
-      <input type="text" placeholder="Your name"  style="padding:10px 12px; border:1px solid #e5e7eb; border-radius:8px;">
-      <input type="email" placeholder="Your email" style="padding:10px 12px; border:1px solid #e5e7eb; border-radius:8px;">
-      <button type="button" style="grid-column:1/-1; padding:12px 16px; border:none; border-radius:8px; background:#2563eb; color:#fff; font-weight:700;">
-        Subscribe
-      </button>
+    <form class="nl-lead">
+      <input type="text" placeholder="Your name">
+      <input type="email" placeholder="Your email">
+      <button type="button">Subscribe</button>
     </form>
 
-    <footer style="margin-top:24px; opacity:.7; font-size:.9rem;">
+    <footer>
       <p class="preview-element" data-type="p">You’re receiving this because you signed up for updates. <a href="#" style="color:inherit;">Unsubscribe</a></p>
     </footer>
   </article>
@@ -49,30 +98,67 @@ const templates = [
 
   // 2) Editorial / Digest
   () => `
-  <article class="nl-digest" data-style="digest" style="padding: 32px; height:100vh; max-width: 720px; margin: 0 auto;">
-    <header style="text-align:center; margin-bottom: 18px;">
-      <h1 class="preview-element" data-type="h1" style="margin:0;">Monthly Product Digest</h1>
-      <p class="preview-element" data-type="p" style="opacity:.85; margin:6px 0 0;">Highlights, tips, and community picks</p>
+  <style>
+    #preview-content .nl-digest{ --pad:32px; --maxw:720px; }
+    #preview-content .nl-digest{
+      box-sizing:border-box;
+      padding:var(--pad);
+      margin:0 auto;
+      width:min(100%, var(--maxw));
+      min-height:100vh;
+      line-height:1.6;
+    }
+    #preview-content .nl-digest header{ text-align:center; margin-bottom:18px; }
+    #preview-content .nl-digest h1{ margin:0; font-size:clamp(1.25rem, 1.05rem + 1.6vw, 2rem); }
+    #preview-content .nl-digest h2{ margin:0; font-size:clamp(1.05rem, 0.95rem + 0.9vw, 1.35rem); }
+    #preview-content .nl-digest p{ margin:.25rem 0 0; }
+    #preview-content .nl-digest section{ display:grid; gap:14px; margin-top:14px; }
+    #preview-content .nl-digest hr{ margin:18px 0; border:none; border-top:1px solid #e5e7eb; }
+    #preview-content .nl-digest .preview-element[data-type="cta"]{
+      display:inline-block; align-self:start; background:#111; color:#fff; padding:10px 14px; border-radius:8px; text-decoration:none; font-weight:700;
+    }
+    #preview-content .nl-digest footer{ margin-top:24px; opacity:.7; font-size:.9rem; }
+
+    /* Phones */
+    @media (max-width: 480px){
+      #preview-content .nl-digest{ --pad:16px; }
+      #preview-content .nl-digest .preview-element[data-type="cta"]{ width:100%; text-align:center; }
+    }
+    /* Small tablets */
+    @media (min-width: 481px) and (max-width: 768px){
+      #preview-content .nl-digest{ --pad:24px; }
+    }
+    /* Desktops */
+    @media (min-width: 769px){
+      #preview-content .nl-digest{ --pad:32px; }
+    }
+    /* Large desktops */
+    @media (min-width: 1200px){
+      #preview-content .nl-digest{ --maxw:840px; }
+    }
+  </style>
+
+  <article class="nl-digest" data-style="digest">
+    <header>
+      <h1 class="preview-element" data-type="h1">Monthly Product Digest</h1>
+      <p class="preview-element" data-type="p" style="opacity:.85;">Highlights, tips, and community picks</p>
     </header>
 
-    <section style="display:grid; gap:14px; margin-top:14px;">
-      <h2 class="preview-element" data-type="h2" style="margin:0;">What’s new</h2>
+    <section>
+      <h2 class="preview-element" data-type="h2">What’s new</h2>
       <p class="preview-element" data-type="p">Feature A now supports real-time collaboration.</p>
       <p class="preview-element" data-type="p">We improved performance on mobile by 35%.</p>
     </section>
 
-    <hr style="margin:18px 0; border:none; border-top:1px solid #e5e7eb;">
+    <hr>
 
-    <section style="display:grid; gap:12px;">
-      <h2 class="preview-element" data-type="h2" style="margin:0;">From the blog</h2>
+    <section>
+      <h2 class="preview-element" data-type="h2">From the blog</h2>
       <p class="preview-element" data-type="p">5 ways to turn readers into customers.</p>
-      <a href="#" class="preview-element" data-type="cta"
-         style="display:inline-block; align-self:start; background:#111; color:#fff; padding:10px 14px; border-radius:8px; text-decoration:none; font-weight:700;">
-         Read the article
-      </a>
+      <a href="#" class="preview-element" data-type="cta">Read the article</a>
     </section>
 
-    <footer style="margin-top:24px; opacity:.7; font-size:.9rem;">
+    <footer>
       <p class="preview-element" data-type="p">Change your preferences or <a href="#" style="color:inherit;">unsubscribe</a>.</p>
     </footer>
   </article>
@@ -80,30 +166,72 @@ const templates = [
 
   // 3) Promo / Ecommerce
   () => `
-  <article class="nl-promo" data-style="promo" style="padding: 32px; height:100vh; max-width: 650px; margin: 0 auto;">
-    <header style="text-align:center; margin-bottom: 16px;">
-      <h1 class="preview-element" data-type="h1" style="margin:0;">Summer Sale — Up to 50% Off</h1>
-      <p class="preview-element" data-type="p" style="opacity:.85; margin:6px 0 0;">Limited time • While supplies last</p>
+  <style>
+    #preview-content .nl-promo{ --pad:32px; --radius:12px; --maxw:650px; }
+    #preview-content .nl-promo{
+      box-sizing:border-box;
+      padding:var(--pad);
+      margin:0 auto;
+      width:min(100%, var(--maxw));
+      min-height:100vh;
+      line-height:1.55;
+    }
+    #preview-content .nl-promo header{ text-align:center; margin-bottom:16px; }
+    #preview-content .nl-promo h1{ margin:0; font-size:clamp(1.25rem, 1.05rem + 1.7vw, 2.05rem); }
+    #preview-content .nl-promo p{ margin:.25rem 0 0; }
+    #preview-content .nl-promo img{
+      width:100%; max-height:320px; height:auto; object-fit:cover;
+      border-radius:var(--radius); margin:14px 0;
+    }
+    #preview-content .nl-promo .preview-element[data-type="cta"]{
+      display:inline-block; background:#ef4444; color:#fff; padding:12px 18px; border-radius:10px; text-decoration:none; font-weight:800; letter-spacing:.2px;
+    }
+    #preview-content .nl-promo section.coupon{
+      margin-top:18px; padding:14px; border:1px dashed #fecaca; border-radius:10px;
+    }
+    #preview-content .nl-promo footer{ margin-top:24px; opacity:.7; font-size:.9rem; }
+
+    /* Phones */
+    @media (max-width: 480px){
+      #preview-content .nl-promo{ --pad:16px; --radius:10px; }
+      #preview-content .nl-promo .preview-element[data-type="cta"]{ width:100%; text-align:center; }
+      #preview-content .nl-promo img{ max-height:260px; }
+    }
+    /* Small tablets */
+    @media (min-width: 481px) and (max-width: 768px){
+      #preview-content .nl-promo{ --pad:24px; }
+    }
+    /* Desktops */
+    @media (min-width: 769px){
+      #preview-content .nl-promo{ --pad:32px; }
+    }
+    /* Large desktops */
+    @media (min-width: 1200px){
+      #preview-content .nl-promo{ --maxw:760px; }
+    }
+  </style>
+
+  <article class="nl-promo" data-style="promo">
+    <header>
+      <h1 class="preview-element" data-type="h1">Summer Sale — Up to 50% Off</h1>
+      <p class="preview-element" data-type="p" style="opacity:.85;">Limited time • While supplies last</p>
     </header>
 
     <img class="preview-element" data-type="img"
          src="" alt="Featured product"
-         style="display:none; width:100%; max-height:320px; height:auto; object-fit:cover; border-radius:12px; margin:14px 0;" />
+         style="display:none;" />
 
-    <p class="preview-element" data-type="p" style="line-height:1.55;">
+    <p class="preview-element" data-type="p">
       Grab your favorites with exclusive discounts for subscribers.
     </p>
 
-    <a href="#" class="preview-element" data-type="cta"
-       style="display:inline-block; background:#ef4444; color:#fff; padding:12px 18px; border-radius:10px; text-decoration:none; font-weight:800; letter-spacing:.2px;">
-       Shop Now
-    </a>
+    <a href="#" class="preview-element" data-type="cta">Shop Now</a>
 
-    <section style="margin-top:18px; padding:14px; border:1px dashed #fecaca; border-radius:10px;">
+    <section class="coupon">
       <p class="preview-element" data-type="p" style="margin:0;"><strong>Use code:</strong> SUMMER25 at checkout</p>
     </section>
 
-    <footer style="margin-top:24px; opacity:.7; font-size:.9rem;">
+    <footer>
       <p class="preview-element" data-type="p">Don’t want promos? <a href="#" style="color:inherit;">Unsubscribe</a>.</p>
     </footer>
   </article>

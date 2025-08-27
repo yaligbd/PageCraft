@@ -206,6 +206,8 @@ grid.addEventListener("click", async (e) => {
 
 }
 function renderSavedNews(){
+  const username = localStorage.getItem("currentUser");
+    if (!username) return;
   const grid = document.querySelector("#newsletters .card-grid");
   if (!grid) return;
 
