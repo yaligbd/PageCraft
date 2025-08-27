@@ -19,6 +19,14 @@ function getBanners(){
   const banners = localStorage.getItem(BANNERS_KEY);
   return banners ? JSON.parse(banners) : [];
 }
+function getNewletters(){
+  const raw = localStorage.getItem("pc_news");
+  try {
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
 function renderSavedPages(){
   const username = localStorage.getItem("currentUser");
     if (!username) return;
@@ -197,6 +205,117 @@ grid.addEventListener("click", async (e) => {
   console.log("Rendering banners:", banners);
 
 }
+function renderSavedNews(){
+  const grid = document.querySelector("#newsletters .card-grid");
+  if (!grid) return;
+
+  const slots = Array.from(grid.querySelectorAll(".empty-card"));
+  const items = getNewletters();
+  if (!items.length) return;
+
+  const count = Math.min(items.length, slots.length);
+  for (let i = 0; i < count; i++){
+    const item = items[i];
+    const slot = slots[i];
+    if (!slot || !item) continue;
+
+    slot.classList.add("saved-card");
+    slot.style.background = item.bg || ""; // light tint (optional)
+    slot.innerHTML = `
+      <div class="card-body">
+        <div class="card-title" contenteditable="true" data-id="${item.id}" title="Click to rename">
+          ${item.name || "Newsletter"}
+        </div>
+        <div class="card-date">${new Date(item.createdAt || Date.now()).toLocaleString()}</div>
+        <div class="card-actions">
+          <button class="control-btn edit-btn" data-id="${item.id}">Edit Newsletter</button>
+          <button class="download-btn" data-id="${item.id}">Download</button>
+          <button class="control-btn delete-btn" data-id="${item.id}">Delete Newsletter</button>
+        </div>
+      </div>
+    `;
+  }
+
+  // Persist inline rename on blur (same pattern as pages)
+  grid.addEventListener("blur", (e) => {
+    const t = e.target;
+    if (!t.classList.contains("card-title")) return;
+    const id = t.dataset.id;
+    const list = getNewletters();
+    const idx = list.findIndex(n => n.id === id);
+    if (idx !== -1){
+      const name = t.textContent.trim();
+      if (name){
+        list[idx].name = name;
+        localStorage.setItem("pc_news", JSON.stringify(list));
+      }
+    }
+  }, true);
+
+  // Buttons: Edit / Download / Delete (mirrors pages logic)
+  grid.addEventListener("click", (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+
+    const id = btn.dataset.id;
+    const list = getNewletters();
+    const item = list.find(n => n.id === id);
+    if (!item) return;
+
+    if (btn.classList.contains("edit-btn")) {
+      // Open the newsletter editor with this id (same nav pattern as pages)
+      location.href = `./pages/News.html?id=${encodeURIComponent(id)}`;
+
+    } else if (btn.classList.contains("download-btn")) {
+      // Build a standalone HTML document and download it (same idea as pages)
+      const htmlDoc = `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>${(item.name || "Newsletter")}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    html,body{height:100%}
+    body{
+      margin:0; padding:24px;
+      display:flex; align-items:flex-start; justify-content:center;
+      background:${item.bg || "#ffffff"};
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+      color:#111827;
+    }
+    a{ color:inherit }
+  </style>
+</head>
+<body>
+${item.html}
+</body>
+</html>`;
+
+      const blob = new Blob([htmlDoc], { type: "text/html" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${String(item.name || "Newsletter").trim().replace(/\s+/g,"_")}.html`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+
+    } else if (btn.classList.contains("delete-btn")) {
+      const idx = list.findIndex(n => n.id === id);
+      if (idx !== -1){
+        list.splice(idx, 1);
+        localStorage.setItem("pc_news", JSON.stringify(list));
+      }
+      const card = btn.closest(".empty-card");
+      if (card){
+        card.classList.remove("saved-card");
+        card.style.background = "";
+        card.textContent = "Empty Project Slot";
+      }
+    }
+  });
+}
 function PBN(key) {
   // Map the click to the right tab + section
   const map = {
@@ -318,6 +437,9 @@ if (hamburger && menu) {
   });
 }
 document.addEventListener("DOMContentLoaded", () => {
+  renderSavedPages();
+  renderSavedBanners();
+  renderSavedNews();
   const allLinks = Array.from(
     document.querySelectorAll(".nav-links a, .hamburger-menu .menu-links a")
   );
@@ -387,9 +509,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-document.addEventListener("DOMContentLoaded", renderSavedPages);
-document.addEventListener("DOMContentLoaded", renderSavedBanners);
-
 document.addEventListener('DOMContentLoaded', () => {
   PBN('p');
   PBN(location.hash === '#banners' ? 'b' : 'p');

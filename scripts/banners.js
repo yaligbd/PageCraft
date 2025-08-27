@@ -109,6 +109,33 @@ const banners = [
 ];
 
 
+function getBannerIdFromURL(){
+  const params = new URLSearchParams(location.search); // built-in helper for query strings
+  return params.get("id");                              // returns the id string or null
+}
+
+
+function loadBannerFromStorage(id){
+  const list = getSavedBanners();                       // read localStorage "pc_banners"
+  const item = list.find(x => x.id === id);             // find the record with this id
+  if (!item) return false;                              // nothing found → signal failure
+
+  const area = previewEl();                             // #preview-content (stable parent)
+  area.innerHTML = item.html;                           // inject the FULL saved <article id="banner">…</article>
+
+  const root = area.querySelector("#banner");           // the live banner root we just injected
+  if (root && item.bg) root.style.background = item.bg; // ensure background is applied
+
+  if (typeof item.style === "number") {                 // remember which template index was used
+    bannersIndex = item.style;
+  }
+  currentBg = item.bg || currentBg;                     // keep bg snapshot in sync
+  selectedEl = null;                                    // nothing selected yet
+
+  wirePreviewSelection();                               // attach click-to-select on the NEW #banner
+  return true;
+}
+
 function renderBanners() {
     const area = previewEl();
     area.innerHTML = banners[bannersIndex]();
@@ -288,6 +315,10 @@ function downloadBanner(){
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    const id = getBannerIdFromURL();
+    const loaded = id ? loadBannerFromStorage(id) : false;
+    if(!isloaded){
     renderBanners();
     wirePreviewSelection();
+    }
 });
