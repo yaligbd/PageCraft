@@ -8,13 +8,20 @@ const menu = document.getElementById("hamburger-menu");
 const navLinks = document.querySelector(".nav-links");
 const STORAGE_QUOTA = 5 * 1024 * 1024;
 const PAGES_KEY = "pc_pages";
+const BANNERS_KEY = "pc_banners";
 
 
 function getPages(){
   const pages = localStorage.getItem(PAGES_KEY);
   return pages ? JSON.parse(pages) : [];
 }
+function getBanners(){
+  const banners = localStorage.getItem(BANNERS_KEY);
+  return banners ? JSON.parse(banners) : [];
+}
 function renderSavedPages(){
+  const username = localStorage.getItem("currentUser");
+    if (!username) return;
   const grid = document.querySelector("#pages .card-grid");
   if(!grid) return; 
 
@@ -106,6 +113,100 @@ grid.addEventListener("click", (e) => {
   console.log("Rendering pages:", pages);
 
 }
+function renderSavedBanners(){
+  const username = localStorage.getItem("currentUser");
+    if (!username) return;
+  const grid = document.querySelector("#banners .card-grid");
+  if(!grid) return; 
+
+  const slots = Array.from(grid.querySelectorAll(".empty-card"));
+  const banners = getBanners();
+
+  if(banners.length === 0) return;
+
+  const count = Math.min(banners.length, slots.length);
+  for(let i = 0; i < count; i++){
+  const project = banners[i];
+  const firstSlot = slots[i];
+  if(!firstSlot || !project) continue;
+
+  // replace the empty slot markup with a simple saved-card
+  firstSlot.classList.add("saved-card");
+  firstSlot.innerHTML = `
+     <div class="card-body">
+       <div class="card-title" contenteditable="true" data-id="${project.id}" title="Click to rename">${project.name}</div>
+        <div class="card-date">${new Date(project.createdAt).toLocaleString()}</div>
+        <div class="card-actions">
+        <button class="control-btn edit-btn" data-id="${project.id}">Edit Project</button>
+        <button class="download-btn" data-id="${project.id}">Download</button>
+        <button class="control-btn delete-btn" data-id="${project.id}">Delete Project</button>
+       </div>
+     </div>`;
+  firstSlot.style.background = project.bg || "#ffffff";
+  }    
+  //project name handeling      
+grid.addEventListener("blur", (e) => {
+  const t = e.target;
+  if (!t.classList.contains("card-title")) return;
+
+  const id = t.dataset.id;
+  const list = getBanners();
+  const i = list.findIndex(x => x.id === id);
+  if (i !== -1) {
+    const newName = t.textContent.trim();
+    if (newName) {
+      list[i].name = newName;
+      localStorage.setItem(BANNERS_KEY, JSON.stringify(list));
+    }
+  }
+}, true); 
+
+
+grid.addEventListener("click", (e) => {
+  const btn = e.target.closest("button");
+  if (!btn) return;
+
+  const id = btn.dataset.id;
+  if (btn.classList.contains("edit-btn")) {
+    // go to builder with ?id=...
+    location.href = `./pages/banner.html?id=${encodeURIComponent(id)}`;
+  } else if (btn.classList.contains("download-btn")) {
+    const list = getBanners();
+    const pg = list.find(x => x.id === id);
+    if (!pg) return false;
+
+    const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${pg.name}</title></head>
+      <body style="background:${pg.bg || "#fff"};">
+        <div>${pg.html}</div>
+      </body></html>`;
+    const blob = new Blob([html], { type: "text/html" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `${pg.name.replace(/\s+/g,"_")}.html`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }else if(btn.classList.contains("delete-btn")){
+    const id = btn.dataset.id;
+    if(!id) return;
+
+    const list = getBanners();
+    const i = list.findIndex(p => p.id === id);
+    if(i !== -1){
+      list.splice(i, 1);//removes 1 item rfom index i
+      localStorage.setItem(PAGES_KEY, JSON.stringify(list));
+    }
+    const card = btn.closest(".empty-card");
+    if(card){
+      card.classList.remove("saved-card");
+      card.style.background = "";
+      card.textContent = "Empty Project Slot";
+    }
+
+  }
+});
+  console.log("Rendering banners:", banners);
+
+}
 function PBN(key) {
   // Map the click to the right tab + section
   const map = {
@@ -127,6 +228,9 @@ function PBN(key) {
     .forEach(sec => sec.classList.add('hidden'));
   const secEl = document.querySelector(target.section);
   if (secEl) secEl.classList.remove('hidden');
+}
+async function ensureHtmlToImage(){
+  
 }
 
 
@@ -220,6 +324,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 document.addEventListener("DOMContentLoaded", renderSavedPages);
+document.addEventListener("DOMContentLoaded", renderSavedBanners);
 
 document.addEventListener('DOMContentLoaded', () => {
   PBN('p');

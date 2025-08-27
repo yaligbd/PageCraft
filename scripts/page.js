@@ -14,15 +14,16 @@ const previewEl = () => $id("preview-content");
 const templates = [
     // 1. Resume Website
     () => `
-        <article class="resume-article" data-style="resume" style="height: 100hv; padding: 10vw 5vh; display:flex; flex-direction: column;">
+        <article class="resume-article" data-style="resume" style="height: 100hv; padding: 2vw 5vh; display:flex; flex-direction: column;">
             <h1 class="preview-element" data-type="h1">Sr. page crafter</h1>
+                        <img class="preview-element" data-type="img"
+                     src="../asssets/ChatGPT Image Aug 18, 2025, 09_11_20 PM.png" alt="Steve Jobs photo"
+                     style=" max-width:180px; max-height:180px; height:auto; object-fit:cover; border-radius:50px; margin:14px 0;" />
             <h2 class="preview-element" data-type="h2">Co-founder, Apple Inc.</h2>
             <p class="preview-element" data-type="p">
                 Visionary entrepreneur and innovator in personal computing, mobile devices, and digital media.
             </p>
-            <img class="preview-element" data-type="img"
-                     src="" alt="Steve Jobs photo"
-                     style="display:none; max-width:120px; max-height:120px; height:auto; object-fit:cover; border-radius:50%; margin:14px 0;" />
+
             <h3 class="preview-element" data-type="h2">Skills</h3>
             <p class="preview-element" data-type="p">
                 Product Design, Leadership, Marketing, Branding, User Experience
@@ -49,6 +50,9 @@ const templates = [
             <h2 class="preview-element" data-type="h2" style="margin-top:12px;">
                 AI, Web3, and the future of digital experiences.
             </h2>
+             <img class="preview-element" data-type="img"
+                     src="../asssets/snake.png" alt="snake photo"
+                     style=" max-width:auto; max-height:300px; height:auto; object-fit:cover; border-radius:50px; margin:14px 0;" />
             <p class="preview-element" data-type="p">
                 The annual Tech Conference showcased breakthroughs in artificial intelligence and blockchain technology, drawing thousands of attendees.
             </p>
@@ -68,6 +72,9 @@ const templates = [
                      style="display:none; max-width:100%; max-height:50vh; height:auto; object-fit:contain; border-radius:16px; margin:10px 0 18px;" />
             <h1 class="preview-element" data-type="h1">Introducing: SmartWatch Pro</h1>
             <h2 class="preview-element" data-type="h2">Your health, connected.</h2>
+                         <img class="preview-element" data-type="img"
+                     src="../asssets/clock.png" alt="snake photo"
+                     style=" max-width:auto; max-height:300px; height:auto; object-fit:cover; border-radius:50px; margin:14px 0;" />
             <p class="preview-element" data-type="p">
                 Track your fitness, monitor your heart rate, and stay connected with notifications—all from your wrist.
             </p>

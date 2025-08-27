@@ -1,13 +1,11 @@
 // TODO:
-// changeBackground function
-
 
 const BANNERS_KEY = "pc_banners";
 let bannersIndex = 0;//0-1 two types of banners
 let currentBg = "#fff";
 let editingId = null;
 let selectedEl = null;
-//You pass it a string (an element’s id), and it returns the DOM element with that id.
+
 const $id = (id) => document.getElementById(id);
 const previewEl = () => $id("preview-content");
 
@@ -249,6 +247,44 @@ function setBackground(color){
     if(!banner) return;
     banner.style.background = color;
     currentBg = color;
+}
+function setCurrentBanner(){
+  const area = document.querySelector("#banner");
+  if(!area) return;
+  const html = area.outerHTML;
+  const bg = getComputedStyle(area).background || currentBg || "#ffffff";
+  const id = "b_"+ Date.now();
+  const style = (typeof bannersIndex === "number") ? bannersIndex : 0;
+  const createdAt = new Date().toISOString(); 
+  const list = getSavedBanners();
+  const name = `Project${list.length + 1}`;
+  return {html,bg,id,style,createdAt,name};
+  
+}
+function getSavedBanners(){
+  try{
+  const raw = localStorage.getItem(BANNERS_KEY);
+  return raw ? JSON.parse(raw) : [];
+  }catch (err){
+    console.error('getSavedBanners:', err);
+    return [];
+  }
+}
+function saveBanner(list){
+  try{
+    localStorage.setItem(BANNERS_KEY, JSON.stringify(list));
+  }catch(err){
+    alert("local storage is full delete projects or try using a different photo");
+    throw err;
+  }
+}
+function downloadBanner(){
+  const project = setCurrentBanner();
+  if(!project) return;
+  const list = getSavedBanners();
+  list.unshift(project);
+  saveBanner(list);
+  window.location.href="../index.html";
 }
 
 document.addEventListener("DOMContentLoaded", () => {
