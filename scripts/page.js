@@ -254,8 +254,6 @@ function updateSelectedElement(){
         }
     }
     selectedEl.style.color = colorSelect?.value || "#232323ff";
-
-
 }
 function deleteSelectedElement(){
     if(!selectedEl) return;

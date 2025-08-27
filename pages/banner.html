@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Banners</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
   <script src="../scripts/3D.JS"></script>
     <script type="module" src="../scripts/index.js"></script>
     <script src="../scripts/login.js"></script>
@@ -106,8 +107,8 @@
           <div class="preview-header">
             <span>Live Preview</span>
             <div class="preview-controls">
-              <button class="preview-btn" onclick="setBanner('0')" data-mode="small" >250 x 250</button>
-              <button class="preview-btn" onclick="setBanner('1')" data-mode="big">300 x 600</button>
+              <button class="preview-btn" onclick="setBanner('small')" data-mode="small" >250 x 250</button>
+              <button class="preview-btn" onclick="setBanner('big')" data-mode="big">300 x 600</button>
             </div>
           </div>
           <div class="preview-container" id="preview-container">
@@ -121,20 +122,79 @@
         <div class="controls-panel">
           <div class="control-group">
             <label>Background Color</label>
-            <div class="color-options">
-              <div class="color-option" data-color="#ffffff" style="background: #ffffff;"></div>
-              <div class="color-option" data-color="#f8f9fa" style="background: #f8f9fa;"></div>
-              <div class="color-option" data-color="#e9ecef" style="background: #e9ecef;"></div>
-              <div class="color-option" data-color="#dee2e6" style="background: #dee2e6;"></div>
-              <div class="color-option" data-color="#1a1a1a" style="background: #1a1a1a;"></div>
-            </div>
+<div class="color-options">
+                              <div class="color-option" onclick="setBackground('#ffffff')" data-color="#ffffff" style="background: #ffffff;"></div>
+  <!-- 1) 135° gradient (purple → pink) -->
+  <div class="color-option" title="135° purple → pink"
+       style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);"
+       onclick="setBackground('linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)')"></div>
+
+  <!-- 2) 180° gradient (orange → yellow) -->
+  <div class="color-option" title="180° orange → yellow"
+       style="background: linear-gradient(180deg, #f7971e 0%, #ffd200 100%);"
+       onclick="setBackground('linear-gradient(180deg, #f7971e 0%, #ffd200 100%)')"></div>
+
+  <!-- 3) Radial gradient (top-left focus, green → teal → blue) -->
+  <div class="color-option" title="Radial green → teal → blue"
+       style="background: radial-gradient(circle at 30% 30%, #9be15d 0%, #00e3ae 55%, #00b4db 100%);"
+       onclick="setBackground('radial-gradient(circle at 30% 30%, #9be15d 0%, #00e3ae 55%, #00b4db 100%)')"></div>
+
+  <!-- 4) Conic gradient (pastel sweep) -->
+  <div class="color-option" title="Conic pastel sweep"
+       style="background: conic-gradient(from 180deg at 50% 50%, #ff9a9e 0%, #fad0c4 25%, #fbc2eb 50%, #a18cd1 75%, #ff9a9e 100%);"
+       onclick="setBackground('conic-gradient(from 180deg at 50% 50%, #ff9a9e 0%, #fad0c4 25%, #fbc2eb 50%, #a18cd1 75%, #ff9a9e 100%)')"></div>
+
+  <!-- 5) Diagonal stripes (repeating) -->
+  <div class="color-option" title="Diagonal stripes (blue/cyan)"
+       style="background: repeating-linear-gradient(45deg, #4facfe 0px, #4facfe 10px, #00f2fe 10px, #00f2fe 20px);"
+       onclick="setBackground('repeating-linear-gradient(45deg, #4facfe 0px, #4facfe 10px, #00f2fe 10px, #00f2fe 20px)')"></div>
+
+  <!-- 6) Overlay stripes + gradient base -->
+  <div class="color-option" title="Overlay stripes on teal/blue"
+       style="background:
+         repeating-linear-gradient(90deg, rgba(255,255,255,.14) 0px, rgba(255,255,255,.14) 7px, rgba(255,255,255,0) 7px, rgba(255,255,255,0) 14px),
+         linear-gradient(135deg, #0ea5e9 0%, #22c55e 100%);"
+       onclick="setBackground('repeating-linear-gradient(90deg, rgba(255,255,255,.14) 0px, rgba(255,255,255,.14) 7px, rgba(255,255,255,0) 7px, rgba(255,255,255,0) 14px), linear-gradient(135deg, #0ea5e9 0%, #22c55e 100%)')"></div>
+
+  <!-- 7) Checkerboard overlay + gradient base -->
+  <div class="color-option" title="Checkerboard + deep blue base"
+       style="background:
+         linear-gradient(45deg, rgba(255,255,255,.22) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.22) 75%) 0 0/20px 20px repeat,
+         linear-gradient(45deg, rgba(255,255,255,.22) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.22) 75%) 10px 10px/20px 20px repeat,
+         linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);"
+       onclick="setBackground('linear-gradient(45deg, rgba(255,255,255,.22) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.22) 75%) 0 0/20px 20px repeat, linear-gradient(45deg, rgba(255,255,255,.22) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.22) 75%) 10px 10px/20px 20px repeat, linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)')"></div>
+
+  <!-- 8) Polka dots overlay + gradient base -->
+  <div class="color-option" title="Dots + pink base"
+       style="background:
+         radial-gradient(circle, rgba(255,255,255,.5) 2px, transparent 3px) 0 0/18px 18px repeat,
+         radial-gradient(circle, rgba(255,255,255,.35) 2px, transparent 3px) 9px 9px/18px 18px repeat,
+         linear-gradient(135deg, #ff7eb3 0%, #ff758c 100%);"
+       onclick="setBackground('radial-gradient(circle, rgba(255,255,255,.5) 2px, transparent 3px) 0 0/18px 18px repeat, radial-gradient(circle, rgba(255,255,255,.35) 2px, transparent 3px) 9px 9px/18px 18px repeat, linear-gradient(135deg, #ff7eb3 0%, #ff758c 100%)')"></div>
+
+  <!-- 9) Soft mesh gradient (multi radial blobs) -->
+  <div class="color-option" title="Soft mesh (multi radial)"
+       style="background:
+         radial-gradient(35% 40% at 20% 30%, #FF9A9E 0%, transparent 60%),
+         radial-gradient(45% 50% at 80% 20%, #FAD0C4 0%, transparent 55%),
+         radial-gradient(40% 45% at 30% 80%, #A1C4FD 0%, transparent 55%),
+         radial-gradient(40% 45% at 70% 70%, #C2FFD8 0%, transparent 55%),
+         linear-gradient(180deg, #fdfbfb 0%, #ebedee 100%);"
+       onclick="setBackground('radial-gradient(35% 40% at 20% 30%, #FF9A9E 0%, transparent 60%), radial-gradient(45% 50% at 80% 20%, #FAD0C4 0%, transparent 55%), radial-gradient(40% 45% at 30% 80%, #A1C4FD 0%, transparent 55%), radial-gradient(40% 45% at 70% 70%, #C2FFD8 0%, transparent 55%), linear-gradient(180deg, #fdfbfb 0%, #ebedee 100%)')"></div>
+
+  <!-- 10) Deep multi-stop angle -->
+  <div class=
+
+
           </div>
 
           <div class="control-group">
             <label>Add Elements</label>
-            <button class="control-btn" onclick="addElement('h1')">Add H1 Heading</button>
+            <button class="control-btn" onclick="addElement('h2')">Add H2 Heading</button>
+            <button class="control-btn" onclick="addElement('h3')">Add H3 Heading</button>
+            <button class="control-btn" onclick="addElement('pic')">Add Image</button>
             <button class="control-btn" onclick="addElement('p')">Add Paragraph</button>
-            <button class="control-btn" onclick="changeBackground('img')">Add Background Image</button>
+            <button class="control-btn" onclick="changeBackground('pic')">Add Background Image</button>
           </div>
 
           <div class="control-group">
@@ -142,6 +202,7 @@
             <input type="text" id="element-text" placeholder="Enter text content" class="control-input">
             <select id="element-color" class="control-select">
               <option value="#333333">Dark Gray</option>
+              <option value="#ffffff">White</option>
               <option value="#000000">Black</option>
               <option value="#666666">Gray</option>
               <option value="#e74c3c">Red</option>
@@ -150,8 +211,8 @@
             </select>
             <button class="control-btn" onclick="updateSelectedElement()">Update Element</button>
             <button class="control-btn delete-btn" onclick="deleteSelectedElement()">Delete Element</button>
-            <button class="control-btn delete-btn">Clear All</button>
-            <button id="send" class="download-btn" onclick="downloadBanner()">Save Banner</button>
+            <button class="control-btn delete-btn" onclick="deleteBanner()">Clear All</button>
+            <button id="send" class="download-btn" >Save Banner</button>
           </div>
         </div>
 

@@ -130,14 +130,68 @@
                 <div class="controls-panel">
                     <div class="control-group">
                         <label>Background Color</label>
-                        <div class="color-options">
-                            <div class="color-option" onclick="changeBackground('#ffffff')" data-color="#ffffff" style="background: #ffffff;"></div>
-                            <div class="color-option" onclick="changeBackground('linear-gradient(230deg, #584dff 0%, #ffffff 30%, #ffffff 70%, #cca5ff 100%)')" data-color="linear-gradient(230deg, #584dff 0%, #ffffff 30%, #ffffff 70%, #cca5ff 100%)" style="background: linear-gradient(230deg, #584dff 0%, #ffffff 30%, #ffffff 70%, #cca5ff 100%);"></div>
-                            <div class="color-option" onclick="changeBackground('linear-gradient(115deg, #ffffff 0%, #a8dfff 45%, #7bfdff 55%, #ffffff 100%)')" data-color="linear-gradient(115deg, #ffffff 0%, #a8dfff 45%, #7bfdff 55%, #ffffff 100%)" style="background: linear-gradient(115deg, #ffffff 0%, #a8dfff 45%, #7bfdff 55%, #ffffff 100%);"></div>
-                            <div class="color-option" onclick="changeBackground('#ffffbc')" data-color="#ffffbc" style="background: #ffffbc;"></div>
-                            <div class="color-option" onclick="changeBackground('#858585')" data-color="#858585" style="background: #858585;"></div>
-                            <div class="color-option" onclick="changeBackground('#000000')" data-color="#000000" style="background: #000000;"></div>
-                        </div>
+<div class="color-options">
+  <!-- 1) Aqua diagonal -->
+  <div class="color-option" title="Aqua diagonal"
+       style="background: linear-gradient(140deg, #90F7EC 0%, #32CCBC 100%);"
+       onclick="changeBackground('linear-gradient(140deg, #90F7EC 0%, #32CCBC 100%)')"></div>
+
+  <!-- 2) Sunset sweep -->
+  <div class="color-option" title="Sunset sweep"
+       style="background: linear-gradient(200deg, #FEE140 0%, #FA709A 100%);"
+       onclick="changeBackground('linear-gradient(200deg, #FEE140 0%, #FA709A 100%)')"></div>
+
+  <!-- 3) Radial mint→blue (focus top-left) -->
+  <div class="color-option" title="Radial mint → blue"
+       style="background: radial-gradient(circle at 30% 25%, #84fab0 0%, #8fd3f4 60%, #ffffff 100%);"
+       onclick="changeBackground('radial-gradient(circle at 30% 25%, #84fab0 0%, #8fd3f4 60%, #ffffff 100%)')"></div>
+
+  <!-- 4) Conic pastel wheel -->
+  <div class="color-option" title="Conic pastel wheel"
+       style="background: conic-gradient(from 90deg at 50% 50%, #6366f1 0 25%, #a78bfa 25% 50%, #f472b6 50% 75%, #22d3ee 75% 100%);"
+       onclick="changeBackground('conic-gradient(from 90deg at 50% 50%, #6366f1 0 25%, #a78bfa 25% 50%, #f472b6 50% 75%, #22d3ee 75% 100%)')"></div>
+
+  <!-- 5) Diagonal stripes (blue/cyan) -->
+  <div class="color-option" title="Diagonal stripes"
+       style="background: repeating-linear-gradient(45deg, #4facfe 0 10px, #4facfe 10px 20px, #00f2fe 20px 30px, #00f2fe 30px 40px);"
+       onclick="changeBackground('repeating-linear-gradient(45deg, #4facfe 0 10px, #4facfe 10px 20px, #00f2fe 20px 30px, #00f2fe 30px 40px)')"></div>
+
+  <!-- 6) Vertical stripes overlay + teal/blue base -->
+  <div class="color-option" title="Overlay stripes on gradient"
+       style="background:
+         repeating-linear-gradient(90deg, rgba(255,255,255,.16) 0 7px, rgba(255,255,255,0) 7px 14px),
+         linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);"
+       onclick="changeBackground('repeating-linear-gradient(90deg, rgba(255,255,255,.16) 0 7px, rgba(255,255,255,0) 7px 14px), linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%)')"></div>
+
+  <!-- 7) Checkerboard overlay + deep base -->
+                                <div class="color-option" onclick="changeBackground('#ffffff')" data-color="#ffffff" style="background: #ffffff;"></div>
+
+  <!-- 8) Polka dots overlay + pink base -->
+  <div class="color-option" title="Dots + pink base"
+       style="background:
+         radial-gradient(circle, rgba(255,255,255,.5) 2px, transparent 3px) 0 0/18px 18px repeat,
+         radial-gradient(circle, rgba(255,255,255,.35) 2px, transparent 3px) 9px 9px/18px 18px repeat,
+         linear-gradient(135deg, #ff7eb3 0%, #ff758c 100%);"
+       onclick="changeBackground('radial-gradient(circle, rgba(255,255,255,.5) 2px, transparent 3px) 0 0/18px 18px repeat, radial-gradient(circle, rgba(255,255,255,.35) 2px, transparent 3px) 9px 9px/18px 18px repeat, linear-gradient(135deg, #ff7eb3 0%, #ff758c 100%)')"></div>
+
+  <!-- 9) Soft mesh (multi radial blobs) -->
+  <div class="color-option" title="Soft mesh gradient"
+       style="background:
+         radial-gradient(35% 45% at 20% 30%, #FF9A9E 0%, transparent 60%),
+         radial-gradient(40% 45% at 80% 25%, #FBC2EB 0%, transparent 55%),
+         radial-gradient(45% 50% at 30% 80%, #A1C4FD 0%, transparent 55%),
+         linear-gradient(180deg, #fdfbfb 0%, #ebedee 100%);"
+       onclick="changeBackground('radial-gradient(35% 45% at 20% 30%, #FF9A9E 0%, transparent 60%), radial-gradient(40% 45% at 80% 25%, #FBC2EB 0%, transparent 55%), radial-gradient(45% 50% at 30% 80%, #A1C4FD 0%, transparent 55%), linear-gradient(180deg, #fdfbfb 0%, #ebedee 100%)')"></div>
+
+  <!-- 10) Dark aurora (blobs over night sky) -->
+  <div class="color-option" title="Dark aurora"
+       style="background:
+         radial-gradient(40% 60% at 20% 80%, rgba(16,185,129,.45), transparent 60%),
+         radial-gradient(35% 55% at 80% 20%, rgba(59,130,246,.45), transparent 60%),
+         linear-gradient(200deg, #0b1020 0%, #111827 100%);"
+       onclick="changeBackground('radial-gradient(40% 60% at 20% 80%, rgba(16,185,129,.45), transparent 60%), radial-gradient(35% 55% at 80% 20%, rgba(59,130,246,.45), transparent 60%), linear-gradient(200deg, #0b1020 0%, #111827 100%)')"></div>
+</div>
+
                     </div>
 
                     <div class="control-group">

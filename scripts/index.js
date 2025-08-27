@@ -1,7 +1,6 @@
 
 // TODO:
 // make the storage bar display some sort of data(preferly the actual data left in local storage) -1
-// move between pages banners newsletters to see all the cards -2
 // fixing navbar highlits -3
 
 const hamburger = document.getElementById("hamburger");
