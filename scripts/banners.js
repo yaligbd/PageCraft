@@ -1,7 +1,7 @@
 // TODO:
 
 const BANNERS_KEY = "pc_banners";
-let bannersIndex = 0;//0-1 two types of banners
+let bannersIndex = 0;
 let currentBg = "#fff";
 let editingId = null;
 let selectedEl = null;
@@ -107,14 +107,10 @@ const banners = [
     </article>
   `
 ];
-
-
 function getBannerIdFromURL(){
   const params = new URLSearchParams(location.search); // built-in helper for query strings
   return params.get("id");                              // returns the id string or null
 }
-
-
 function loadBannerFromStorage(id){
   const list = getSavedBanners();                       // read localStorage "pc_banners"
   const item = list.find(x => x.id === id);             // find the record with this id
@@ -135,7 +131,6 @@ function loadBannerFromStorage(id){
   wirePreviewSelection();                               // attach click-to-select on the NEW #banner
   return true;
 }
-
 function renderBanners() {
     const area = previewEl();
     area.innerHTML = banners[bannersIndex]();
@@ -313,7 +308,6 @@ function downloadBanner(){
   saveBanner(list);
   window.location.href = "../index.html#banners";
 }
-
 document.addEventListener("DOMContentLoaded", () => {
     const id = getBannerIdFromURL();
     const loaded = id ? loadBannerFromStorage(id) : false;

@@ -15,7 +15,6 @@
   <link rel="stylesheet" href="../styles/media.css" />
 </head>
 <body id="pages">
-    <!-- Hero Section -->
     <section class="hero" id="hero">
         <div class="hero-background">
             <div class="bg-slide active" style="background: linear-gradient(325deg, #ffffff 0%, #9cbfff 60%, #5643ff 100%);"></div>
@@ -23,11 +22,9 @@
             <div class="bg-slide" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
             <div class="bg-slide" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);"></div>
         </div>
-        
-       <!-- ... (rest of your HTML head and body) ... -->
 
 <nav class="navbar">
-  <!-- Left: Logo -->
+
   <div class="nav-logo">
     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
          xmlns="http://www.w3.org/2000/svg">
@@ -37,7 +34,7 @@
     <span>PageCraft</span>
   </div>
 
-  <!-- Center: Navigation links (desktop only) -->
+
   <div class="nav-links">
     <a href="../index.html">Dashboard</a>
     <a href="./page.html">Pages</a>
@@ -47,7 +44,7 @@
   <a href="./about.html">About</a>
 </div>
 
-  <!-- Right: Actions (desktop only) -->
+
   <div class="nav-actions desktop-only">
     <button class="lang-btn">🌐 EN</button>
     <a href="./login.html" class="profile-btn">Log In</a>
@@ -55,10 +52,10 @@
     <div id="profileDiv" style="display:none; align-items:center; gap:8px;"></div>
   </div>
 
-  <!-- Mobile Hamburger -->
+
   <button class="hamburger mobile-only" id="hamburger">☰</button>
 
-  <!-- Mobile Dropdown -->
+
   <div class="hamburger-menu" id="hamburger-menu">
     <div class="menu-links">
         <a href="../index.html">Dashboard</a>
@@ -72,7 +69,7 @@
               <button class="log-out">Log Out</button> <!--   it is styled in main.css to be displayed none -->
     </div>
 
-    <!-- Profile section -->
+
     <div class="menu-profile">
       <img src="../asssets/ChatGPT Image Aug 18, 2025, 09_11_20 PM.png" alt="User Avatar" class="profile-avatar">
       <div class="profile-info">
@@ -94,8 +91,6 @@
         </div>
         <div id="hero-3d-container"></div>
     </section>
-
-    <!-- Page Editor Section -->
     <section class="editor-section" id="editor">
         <div class="container">
             <h2 class="section-title">Page Builder</h2>
@@ -103,7 +98,7 @@
             <div class="editor-grid">
                 
 
-                <!-- Live Preview -->
+           
                 <div class="preview-panel">
                     <div class="preview-header">
                         <span>Live Preview</span>
@@ -112,7 +107,7 @@
                             <button class="preview-btn" data-mode="Style 2">Style 2</button>
                             <button class="preview-btn" data-mode="Style 3">Style 3</button>
                         </div>
-                        <!-- Template style switcher arrows -->
+                 
                         <div class="style-arrows">
                         <span>Text Alignment</span>
                               <button id="tpl-prev" class="style-arrow" aria-label="Previous style">⟵</button>
@@ -126,7 +121,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Controls Panel -->
+                
                 <div class="controls-panel">
                     <div class="control-group">
                         <label>Background Color</label>
@@ -224,7 +219,6 @@
             </div>
         </div>
     </section>
-
 <footer class="site-footer">
   <div class="footer-container">
     
@@ -255,11 +249,8 @@
     <p>&copy; <span id="year"></span> PageCraft. All rights reserved.</p>
   </div>
 </footer>
-
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
 </script>
-
-
 </body>
 </html>

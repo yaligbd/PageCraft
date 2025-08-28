@@ -3,20 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About — PageCraft</title>
-
-  <!-- Site styles -->
+  <title>About</title>
   <link rel="stylesheet" href="../styles/main.css" />
   <link rel="stylesheet" href="../styles/media.css" />
-  <!-- Reuse the same helper styles used on Deploy (cards, grid, badges, notes) -->
   <link rel="stylesheet" href="../styles/deploy.css" />
-
   <script type="module" src="../scripts/index.js"></script>
   <script src="../scripts/login.js"></script>
 </head>
 <body id="about">
-
-  <!-- HERO (keeps your hero + navbar structure for consistent styling) -->
   <section class="hero" id="hero">
     <div class="hero-background">
       <div class="bg-slide active" style="background: linear-gradient(325deg, #ffffff 0%, #8ff7bf 60%, #3ec731 100%);"></div>
@@ -98,8 +92,6 @@
 
     <div id="hero-3d-container"></div>
   </section>
-
-  <!-- MAIN -->
   <main class="container" >
     <h2 class="section-title" style="text-align:center;">Our Story</h2>
 
@@ -169,8 +161,6 @@
       </div>
     </section>
   </main>
-
-  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="footer-container">
       <!-- Footer Logo -->
@@ -198,7 +188,6 @@
       <p>&copy; <span id="year"></span> PageCraft. All rights reserved.</p>
     </div>
   </footer>
-
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>

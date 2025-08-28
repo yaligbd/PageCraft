@@ -4,21 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dashboard</title>
-<script src="https://unpkg.com/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
-
+  <script src="https://unpkg.com/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script type="module" src="./scripts/3D.JS"></script>
   <script type="module" src="./scripts/index.js"></script>
   <script src="./scripts/login.js"></script>
-
-  <!-- Sitewide styles -->
   <link rel="stylesheet" href="./styles/main.css" />
-  <!-- Dashboard specific styles -->
   <link rel="stylesheet" href="./styles/dashboard.css" />
 </head>
 <body id="dashboard">
-
-  <!-- Hero Section with Navbar (styled by main.css) -->
   <section class="hero" id="hero">
     <div class="hero-background">
       <div class="bg-slide active" style="background: linear-gradient(325deg, #ffffff 0%,#b18dfdde 60%, #7824ac 100%);"></div>
@@ -98,11 +92,9 @@
     <div id="hero-3d-container"></div>
 
   </section>
-
-  <!-- Dashboard Section (styled by dashboard.css) -->
   <section class="editor-section" id="dashboard-section">
     
-    <!-- Storage Panel -->
+ 
     <div class="storage-panel">
       <div class="storage-label">Storage Used: <span id="storage-percent">40%</span></div>
       <div class="storage-bar">
@@ -110,8 +102,7 @@
       </div>
     </div>
 
-    <!-- Category Selector -->
-<!-- Category Selector -->
+
 <div class="dashboard-buttons">
   <p id="tab-pages"   class="dashboard-tab active" onclick="PBN('p')">Pages</p>
   <p id="tab-banners" class="dashboard-tab"        onclick="PBN('b')">Banners</p>
@@ -136,7 +127,7 @@
 
     <!-- Banners -->
     <div class="category-section hidden" id="banners">
-      <a href="./pages/page.html"><button class="cta-button" id="create">Create New Banner</button></a>
+      <a href="./pages/banner.html"><button class="cta-button" id="create">Create New Banner</button></a>
       <div class="card-grid">
         <div class="empty-card">Empty Project Slot</div>
         <div class="empty-card">Empty Project Slot</div>
@@ -151,7 +142,7 @@
 
     <!-- Newsletters -->
     <div class="category-section hidden" id="newsletters">
-      <a href="./pages/page.html"><button class="cta-button">Create New Newsletter</button></a>
+      <a href="./pages/News.html"><button class="cta-button">Create New Newsletter</button></a>
       <div class="card-grid">
         <div class="empty-card">Empty Project Slot</div>
         <div class="empty-card">Empty Project Slot</div>
@@ -165,7 +156,6 @@
     </div>
 
   </section>
-  <!-- Send Newsletter Section -->
 <section class="send-newsletter">
   <h2 class="send-newsletter-title">Send a Newsletter</h2>
   
@@ -191,7 +181,6 @@
     <button id="send" type="submit" class="send-btn">Send Newsletter</button>
   </form>
 </section>
-<!-- Footer -->
 <footer class="site-footer">
   <div class="footer-container">
     
@@ -222,10 +211,8 @@
     <p>&copy; <span id="year"></span> PageCraft. All rights reserved.</p>
   </div>
 </footer>
-
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
 </script>
-
 </body>
 </html>

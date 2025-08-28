@@ -1,7 +1,4 @@
 
-// TODO:
-// make the storage bar display some sort of data(preferly the actual data left in local storage) -1
-// fixing navbar highlits -3
 
 const hamburger = document.getElementById("hamburger");
 const menu = document.getElementById("hamburger-menu");
@@ -9,7 +6,6 @@ const navLinks = document.querySelector(".nav-links");
 const STORAGE_QUOTA = 5 * 1024 * 1024;
 const PAGES_KEY = "pc_pages";
 const BANNERS_KEY = "pc_banners";
-
 
 function getPages(){
   const pages = localStorage.getItem(PAGES_KEY);
@@ -378,7 +374,6 @@ async function ensureHtmlToImage(){
   }
   throw lastErr || new Error('html-to-image failed to load');
 }
-
 async function exportBannerAsImage(item, {format = "png"} = {}){
   //item  - a record from localStorage 
   //opts  - { format: "png" | "jpg" }
@@ -418,7 +413,6 @@ async function exportBannerAsImage(item, {format = "png"} = {}){
     host.remove();
   }
 }
-
 //navbar+hamburger handeling 
 if (hamburger && menu) {
   hamburger.addEventListener("click", (e) => {

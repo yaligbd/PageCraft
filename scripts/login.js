@@ -1,7 +1,3 @@
-//TODO:
-// when the user isnt logged in dont load any projects
-
-
 
 function getUsers(){
     const users = localStorage.getItem("users");

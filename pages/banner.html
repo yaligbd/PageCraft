@@ -14,8 +14,6 @@
   <link rel="stylesheet" href="../styles/media.css" />
 </head>
 <body id="banners">
-
-  <!-- Hero Section -->
   <section class="hero" id="hero">
     <div class="hero-background">
       <div class="bg-slide active" style="background: linear-gradient(325deg, #ffffff 0%, #6defd5 60%, #00a4a7 100%);"></div>
@@ -24,9 +22,9 @@
       <div class="bg-slide" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);"></div>
     </div>
 
-    <!-- Navbar -->
+
 <nav class="navbar">
-  <!-- Left: Logo -->
+
   <div class="nav-logo">
     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
          xmlns="http://www.w3.org/2000/svg">
@@ -36,7 +34,7 @@
     <span>PageCraft</span>
   </div>
 
-  <!-- Center: Navigation links (desktop only) -->
+
   <div class="nav-links">
     <a href="../index.html">Dashboard</a>
   <a href="./page.html">Pages</a>
@@ -46,7 +44,7 @@
   <a href="./about.html">About</a>
 </div>
 
-  <!-- Right: Actions (desktop only) -->
+
   <div class="nav-actions desktop-only">
     <button class="lang-btn">🌐 EN</button>
     <a href="./login.html" class="profile-btn">Log In</a>
@@ -54,10 +52,10 @@
     <div id="profileDiv" style="display:none; align-items:center; gap:8px;"></div>
   </div>
 
-  <!-- Mobile Hamburger -->
+
   <button class="hamburger mobile-only" id="hamburger">☰</button>
 
-  <!-- Mobile Dropdown -->
+
   <div class="hamburger-menu" id="hamburger-menu">
     <div class="menu-links">
         <a href="../index.html">Dashboard</a>
@@ -68,10 +66,10 @@
         <a href="./about.html">About</a>
         <a href="./sign.html" class="btn-gradient">Get Started</a>
         <a href="./login.html" class="profile-btn">Log In</a>
-              <button class="log-out">Log Out</button> <!--   it is styled in main.css to be displayed none -->
+              <button class="log-out">Log Out</button> 
     </div>
 
-    <!-- Profile section -->
+
     <div class="menu-profile">
        <img src="../asssets/ChatGPT Image Aug 18, 2025, 09_11_20 PM.png" alt="User Avatar" class="profile-avatar">
       <div class="profile-info">
@@ -94,15 +92,13 @@
     </div>
     <div id="hero-3d-container"></div>
   </section>
-
-  <!-- Banner Editor Section -->
   <section class="editor-section" id="editor">
     <div class="container">
       <h2 class="section-title">Banner Builder</h2>
 
       <div class="editor-grid">
 
-        <!-- Live Preview -->
+      
         <div class="preview-panel">
           <div class="preview-header">
             <span>Live Preview</span>
@@ -118,13 +114,13 @@
           </div>
         </div>
 
-        <!-- Controls Panel -->
+      
         <div class="controls-panel">
           <div class="control-group">
             <label>Background Color</label>
 <div class="color-options">
                               <div class="color-option" onclick="setBackground('#ffffff')" data-color="#ffffff" style="background: #ffffff;"></div>
-  <!-- 1) 135° gradient (purple → pink) -->
+  
   <div class="color-option" title="135° purple → pink"
        style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);"
        onclick="setBackground('linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)')"></div>
@@ -219,12 +215,10 @@
       </div>
     </div>
   </section>
-
-  <!-- Footer -->
 <footer class="site-footer">
   <div class="footer-container">
     
-    <!-- Footer Logo -->
+    
     <div class="footer-logo">
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="40" height="40" rx="8" fill="white" fill-opacity="0.2"/>
@@ -233,7 +227,7 @@
       <span>PageCraft</span>
     </div>
 
-    <!-- Footer Links -->
+   
     <ul class="footer-links">
       <li><a href="#">Careers</a></li>
       <li><a href="./about.html">About</a></li>
@@ -246,7 +240,7 @@
     
   </div>
 
-  <!-- Footer Bottom -->
+
   <div class="footer-bottom">
     <p>&copy; <span id="year"></span> PageCraft. All rights reserved.</p>
   </div>
@@ -255,19 +249,6 @@
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
 </script>
-
-  <script>
-    function setBannerSize(size) {
-      const preview = document.getElementById('preview-container');
-      if (size === '250x250') {
-        preview.style.maxWidth = '250px';
-        preview.style.height = '250px';
-      } else if (size === '300x600') {
-        preview.style.maxWidth = '300px';
-        preview.style.height = '600px';
-      }
-    }
-  </script>
   
 </body>
 </html>

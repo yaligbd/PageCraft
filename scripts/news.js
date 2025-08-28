@@ -237,14 +237,10 @@ const templates = [
   </article>
   `,
 ];
-
-
 function getBannerIdFromURL(){
   const params = new URLSearchParams(location.search); // built-in helper for query strings
   return params.get("id");                              // returns the id string or null
 }
-
-
 function loadBannerFromStorage(id){
   const list = getSavedBanners();                       
   const item = list.find(x => x.id === id);             
@@ -265,7 +261,6 @@ function loadBannerFromStorage(id){
   wirePreviewSelection();                              
   return true;
 }
-
 function getProjectIdFromURL() {
   const params = new URLSearchParams(window.location.search);
   return params.get("id");
@@ -301,7 +296,6 @@ function setPreviewMode(mode) {
   templateIndex = map[mode];
   renderTemplate();
 }
-
 function wirePreviewSelection() {
   const area = document.querySelector("#preview-content");
   if (!area) return;
@@ -326,7 +320,6 @@ function wirePreviewSelection() {
     }
   });
 }
-
 function getStage(el) {
   const align = parseInt(el?.dataset.alignStage ?? "1", 10);
   if (isNaN(align) || align < 0 || align > 2) return 1;
@@ -356,8 +349,6 @@ function wireArrows() {
   document.getElementById("tpl-prev")?.addEventListener("click", () => stepAlign("left"));
   document.getElementById("tpl-next")?.addEventListener("click", () => stepAlign("right"));
 }
-
-
 function addElement(tag) {
   const area = document.querySelector("#preview-content");
   if (!area) return;
@@ -427,8 +418,6 @@ function openImagePicker(onReady) {
   });
   input.click();
 }
-
-
 function changeBackground(color) {
   const area = document.querySelector("#preview-content");
   if (!area) return;
@@ -463,8 +452,6 @@ function deletePage() {
   area.innerHTML = "";
   selectedEl = null;
 }
-
-/* ======================= build + save ======================= */
 function buildProjectFromPreview() {
   const area = document.getElementById("preview-content");
   if (!area) return null;
@@ -484,8 +471,6 @@ function saveNewsletter() {
   list.unshift(project);
   setNews(list);
 }
-
-/* ======================= boot ======================= */
 document.addEventListener("DOMContentLoaded", () => {
   // support editing via ?id=...
   editingId = getProjectIdFromURL();

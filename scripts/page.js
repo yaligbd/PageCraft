@@ -2,15 +2,14 @@
 
 const PAGES_KEY = "pc_pages";
 
-let templateIndex = 0;       // 0-2 templates
-let selectedEl = null;       // currently selected element
-let currentBg = "#ffffff";   // actual page background color
-let editingId = null;//old project
+let templateIndex = 0;     
+let selectedEl = null;       
+let currentBg = "#ffffff";  
+let editingId = null;
 
 const $id = (id) => document.getElementById(id);
 const previewEl = () => $id("preview-content");
 
-/* --------------------- TEMPLATES (news look) --------------------- */
 const templates = [
     // 1. Resume Website
     () => `
@@ -273,7 +272,6 @@ function deletePage(){
     area.innerHTML = "";
     selectedEl = null;
 }
-
 function getPages(){
     const raw = localStorage.getItem(PAGES_KEY);//string or null
     return raw ? JSON.parse(raw) : []; //turns json into array
@@ -306,7 +304,6 @@ function downloadPage(){
     list.unshift(project);//add to start
     setPages(list);
 }
-
 document.addEventListener("DOMContentLoaded", () => {
     editingId = getProjectIdFromURL();
     console.log("editing id", editingId);
